@@ -55,3 +55,16 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Migrations
+compras/migrations
+inventario/migrations
+mainapp/migrations
+planeacion/migrations
+produccion/migrations
+ventas/migrations
+
+db.sqlite3
+
+.idea
+*.iml
