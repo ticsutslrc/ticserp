@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{# Cargar la libreria de bootstrap form #}
+{% load bootstrap3 %}
+
+{% block title %}
+    Consultar productos
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Consultar Productos</h2>
+        </div>
+        <div class="col-lg-6">
+            <a href="{% url 'inventario:productos_alta' %}" class="btn btn-success btn-small pull-right">Agregar Producto</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>descripccion</th>
+                    <th>numero_inventario</th>
+                    <th>codigo_barras</th>
+                    <th>peso</th>
+                    <th>ultimo_costo</th>
+                    <th>costo_promedio</th>
+                    <th>cantidad_total_almacen</th>
+                    <th>cantidad_minimo_almacen</th>
+                    <th>fecha_creacion</th>
+                    <th>fecha_modificacion</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if productos %}
+                    {% for producto in productos %}
+                        <tr onclick="window.location='{% url 'inventario:productos_modificar' pk=producto.pk %}'">
+                            <td>{{ producto.nombre }} </td>
+                            <td>{{ producto.descripccion }} </td>
+                            <td>{{ producto.numero_inventario }} </td>
+                            <td>{{ producto.codigo_barras }} </td>
+                            <td>{{ producto.peso }} </td>
+                            <td>{{ producto.ultimo_costo }} </td>
+                            <td>{{ producto.costo_promedio }} </td>
+                            <td>{{ producto.cantidad_total_almacen }} </td>
+                            <td>{{ producto.cantidad_minimo_almacen }} </td>
+                            <td>{{ producto.fecha_creacion }} </td>
+                            <td>{{ producto.fecha_modificacion }} </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <p>Nada que mostrar</p>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Principal
+{% endblock %}
+
+{% block body %}
+    <h1>Hola mundo yo soy inventario</h1>
+    <a href="{% url 'inventario:productos_consultar' %}" class="btn btn-success">Consultar Productos</a>
+    <a href="{% url 'inventario:productos_alta' %}" class="btn btn-success">Agregar Producto</a>
+{% endblock %}
