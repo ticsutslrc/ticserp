@@ -57,12 +57,12 @@ docs/_build/
 target/
 
 # Migrations
-#compras/migrations
-#inventario/migrations
-#mainapp/migrations
-#planeacion/migrations
-#produccion/migrations
-#ventas/migrations
+compras/migrations
+inventario/migrations
+mainapp/migrations
+planeacion/migrations
+produccion/migrations
+ventas/migrations
 
 db.sqlite3
 
