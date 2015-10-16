@@ -18,7 +18,7 @@ def ClienteNuevo(request):
     if request.method == 'POST':
         form = forms.ClienteForm(request.POST or None)
         if form.is_valid():
-            instance = forma.save()
+            instance = form.save()
             messages.add_message(request, messages.INFO, 'Cliente agregado con exito')
             return HttpResponseRedirect(reverse('ventas:clientes_consultar'))
         else:
