@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{# Cargar la libreria de bootstrap form #}
+{% load bootstrap3 %}
+
+{% block title %}
+    Consultar clientes
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Consultar Clientes</h2>
+        </div>
+        <div class="col-lg-6">
+            <a href="{% url 'ventas:clientes_nuevo' %}" class="btn btn-success btn-small pull-right">Nuevo Cliente</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Compañia</th>
+                    <th>Direccion</th>
+                    <th>Ubicacion</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if clientes %}
+                    {% for cliente in clientes %}
+                        <tr onclick="window.location='{% url 'ventas:clientes_editar' pk=cliente.pk %}'">
+                            <td>{{ cliente.nombre }} </td>
+                            <td>{{ cliente.compania }} </td>
+                            <td>{{ cliente.direccion }} </td>
+                            <td>{{ cliente.ubicacion }} </td>
+                            <td>{{ cliente.telefono }} </td>
+                            <td>{{ cliente.correo }} </td>                            
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <p>Ningun registro</p>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}
