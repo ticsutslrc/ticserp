@@ -1,0 +1,23 @@
+<form action="{{ action }}/" method="post">
+    {% csrf_token %}
+
+    Nombre:
+    <input name="ClienteNombre" value="{{ cliente.nombre }}"><br><br>
+
+    Compania:
+    <input name="ClienteCompania" value="{{ cliente.compania }}"><br><br>
+
+    Direccion:
+    <input name="ClienteDireccion" value="{{ cliente.direccion }}"><br><br>
+
+    Ubicacion:
+    <input name="ClienteUbicacion" value="{{ cliente.ubicacion }}"><br><br>
+
+    Telefono:
+    <input name="ClienteTelefono" value="{{ cliente.telefono }}"><br><br>
+
+    Correo:
+    <input name="ClienteCorreo" value="{{ cliente.correo }}"><br><br>
+
+    <input type="submit" value="{{ boton }}">
+</form>
