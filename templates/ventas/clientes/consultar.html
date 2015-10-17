@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 
 {% block title %}
-    Consultar clientes
+    Consultar Clientes
 {% endblock %}
 
 {% block body %}
@@ -32,13 +32,17 @@
                 <tbody>
                 {% if clientes %}
                     {% for cliente in clientes %}
-                        <tr onclick="window.location='{% url 'ventas:clientes_editar' pk=cliente.pk %}'">
+                        <tr>
                             <td>{{ cliente.nombre }} </td>
                             <td>{{ cliente.compania }} </td>
                             <td>{{ cliente.direccion }} </td>
                             <td>{{ cliente.ubicacion }} </td>
                             <td>{{ cliente.telefono }} </td>
-                            <td>{{ cliente.correo }} </td>                            
+                            <td>{{ cliente.correo }} </td>      
+                            <td>
+                            <button class="btn btn-primary" onclick="window.location='{% url 'ventas:clientes_editar' pk=cliente.pk %}'">Editar</button>
+                            <button class="btn btn-danger" onclick="window.location='{% url 'ventas:clientes_eliminar' pk=cliente.pk %}'">Eliminar</button>
+                            </td>                       
                         </tr>
                     {% endfor %}
                 {% else %}
