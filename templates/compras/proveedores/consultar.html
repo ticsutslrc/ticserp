@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{# Cargar la libreria de bootstrap form #}
+{% load bootstrap3 %}
+
+{% block title %}
+    Consultar proveedores
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Consultar Proveedores</h2>
+        </div>
+        <div class="col-lg-6">
+            <a href="{% url 'compras:proveedor_alta' %}" class="btn btn-success btn-small pull-right">Agregar Proveedor</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>direccion</th>
+                    <th>ciudad</th>
+                    <th>estado</th>
+                    <th>pais</th>
+                    <th>responsable</th>
+                    <th>telefono</th>
+                    <th>correo</th>
+                    <th>fecha_creacion</th>
+                    <th>fecha_modificacion</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if proveedores %}
+                    {% for proveedor in proveedores %}
+                        <tr onclick="window.location='{% url 'compras:proveedor_modificar' pk=proveedor.pk %}'">
+                            <td>{{ proveedor.nombre }} </td>
+                            <td>{{ proveedor.direccion }} </td>
+                            <td>{{ proveedor.ciudad }} </td>
+                            <td>{{ proveedor.estado }} </td>
+                            <td>{{ proveedor.pais }} </td>
+                            <td>{{ proveedor.responsable }} </td>
+                            <td>{{ proveedor.telefono }} </td>
+                            <td>{{ proveedor.correo }} </td>
+                            <td>{{ proveedor.fecha_creacion }} </td>
+                            <td>{{ proveedor.fecha_modificacion }} </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <p>Nada que mostrar</p>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}

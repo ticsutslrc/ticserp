@@ -6,4 +6,6 @@ Principal
 
 {% block body %}
     <h1>Hola mundo yo soy compras</h1>
+	<a href="{% url 'compras:proveedor_consultar' %}" class="btn btn-success">Consultar Proveedores</a>
+    <a href="{% url 'compras:proveedor_alta' %}" class="btn btn-success">Agregar Proveedores</a>
 {% endblock %}
