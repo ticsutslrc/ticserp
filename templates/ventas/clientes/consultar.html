@@ -22,9 +22,12 @@
                 <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Compañia</th>
+                    <th>RFC</th>
                     <th>Direccion</th>
-                    <th>Ubicacion</th>
+                    <th>Ciudad</th>
+                    <th>Estado</th>
+                    <th>Pais</th>
+                    <th>Giro</th>
                     <th>Telefono</th>
                     <th>Correo</th>
                 </tr>
@@ -34,9 +37,12 @@
                     {% for cliente in clientes %}
                         <tr>
                             <td>{{ cliente.nombre }} </td>
-                            <td>{{ cliente.compania }} </td>
+                            <td>{{ cliente.rfc }} </td>
                             <td>{{ cliente.direccion }} </td>
-                            <td>{{ cliente.ubicacion }} </td>
+                            <td>{{ cliente.ciudad }} </td>
+                            <td>{{ cliente.estado }} </td>
+                            <td>{{ cliente.pais }} </td>
+                            <td>{{ cliente.giro }} </td>
                             <td>{{ cliente.telefono }} </td>
                             <td>{{ cliente.correo }} </td>      
                             <td>

@@ -14,3 +14,6 @@ class Proveedor(models.Model):
 	
 	fecha_creacion = models.DateTimeField(auto_now_add=True, null = True, blank=True)
 	fecha_modificacion = models.DateTimeField(auto_now=True, null = True, blank=True)
+
+	def __str__(self):
+		return self.nombre

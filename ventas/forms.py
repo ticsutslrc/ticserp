@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from django.forms import ModelForm
 
 from . import models
@@ -8,9 +9,12 @@ class ClienteForm(ModelForm):
         model = models.Cliente
         fields = [
             'nombre',
-            'compania',
+            'rfc',
             'direccion',
-            'ubicacion',
+            'ciudad',
+            'estado',
+            'pais',
+            'giro',
             'telefono',
             'correo',
         ]

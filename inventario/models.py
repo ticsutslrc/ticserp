@@ -18,3 +18,6 @@ class Producto(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.nombre
+
