@@ -6,7 +6,6 @@ class Venta(models.Model):
     num_factura = models.IntegerField()
     fecha = models.DateTimeField(auto_now=True)
     cliente = models.ForeignKey('ventas.Cliente', null=True)
-    productos = models.ManyToManyField('inventario.Producto')
     total = models.DecimalField(decimal_places=4, max_digits=10)
     status = models.IntegerField()
 
@@ -16,7 +15,7 @@ class Venta(models.Model):
 
 class DetalleVenta(models.Model):
     venta = models.ForeignKey('ventas.Venta',null=True)
-    producto = models.CharField(null=False, max_length=50)
+    producto = models.ForeignKey('inventario.Producto', null=False)
     cantidad = models.IntegerField()
     precio = models.DecimalField(decimal_places=4, max_digits=10)
 
@@ -25,6 +24,7 @@ class DetalleVenta(models.Model):
 
 
 class Cliente(models.Model):
+    num_cliente = models.CharField(null=False, max_length=50)
     nombre = models.CharField(null=False, max_length=100)
     rfc = models.CharField(null=False, max_length=50)
     direccion = models.CharField(null=False, max_length=100)
