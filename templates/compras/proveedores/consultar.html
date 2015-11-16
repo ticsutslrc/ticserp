@@ -21,44 +21,53 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>nombre</th>
-                    <th>direccion</th>
-                    <th>ciudad</th>
-                    <th>estado</th>
-                    <th>pais</th>
-                    <th>responsable</th>
-                    <th>telefono</th>
-                    <th>correo</th>
-                    <th>fecha_creacion</th>
-                    <th>fecha_modificacion</th>
+                    <th>No. Proveedor</th>
+                    <th>Fecha Modificacion</th>
+                    <th>Nombre</th>
+                    <th>RFC</th>
+                    <th>Giro</th>
+                    <th>Direccion</th>
+                    <th>Ciudad</th>
+                    <th>Estado</th>
+                    <th>Pais</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Comentario</th>
+                    <th>Fecha Creacion</th>
+                    
                 </tr>
                 </thead>
                 <tbody>
                 {% if proveedores %}
                     {% for proveedor in proveedores %}
                         <tr onclick="window.location='{% url 'compras:proveedor_modificar' pk=proveedor.pk %}'">
+                            <td>{{ proveedor.num_proveedor}}</td>
+                            <td>{{ proveedor.fecha_modificacion }} </td>
                             <td>{{ proveedor.nombre }} </td>
+                            <td>{{ proveedor.RFC }}</td>
+                            <td>{{ proveedor.giro }}</td>
                             <td>{{ proveedor.direccion }} </td>
                             <td>{{ proveedor.ciudad }} </td>
                             <td>{{ proveedor.estado }} </td>
                             <td>{{ proveedor.pais }} </td>
-                            <td>{{ proveedor.responsable }} </td>
-                            <td>{{ proveedor.telefono }} </td>
+                            <td>{{ proveedor.telefono }}</td>
                             <td>{{ proveedor.correo }} </td>
-                            <td>{{ proveedor.fecha_creacion }} </td>
-                            <td>{{ proveedor.fecha_modificacion }} </td>
+                            <td>{{ proveedor.comentario }}</td>
+                            <td>{{ proveedor.fecha_creacion }}</td>                            
                         </tr>
                     {% endfor %}
+
                 {% else %}
                     <tr>
                         <p>Nada que mostrar</p>
                     </tr>
                 {% endif %}
                 </tbody>
+
             </table>
         </div>
     </div>
 
-
+<a href="{% url 'compras:reporteproveedores' %}" class="btn btn-success btn-small pull-right">Imprimir</a>
 
 {% endblock %}

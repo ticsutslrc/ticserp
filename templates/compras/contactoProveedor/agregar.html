@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{# Cargar la libreria de bootstrap form #}
+{% load bootstrap3 %}
+
+{% block title %}
+    Agregar compra
+{% endblock %}
+
+{% block body %}
+    {# Display a form #}
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "star" %} Guardar
+            </button>
+
+        {% endbuttons %}
+    </form>
+    <a href="../"><button class="btn btn-primary">Salir</button></a>
+{% endblock %}
