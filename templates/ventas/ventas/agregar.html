@@ -3,11 +3,18 @@
 {% load bootstrap3 %}
 
 {% block title %}
-    Nueva Venta
+    Agregar Venta
 {% endblock %}
 
 {% block body %}
     {# Display a form #}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Agregar Venta</h2>
+            <br>
+        </div>
+    </div>
+
     <form action="" method="post" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}

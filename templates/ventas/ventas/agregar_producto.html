@@ -8,6 +8,13 @@
 
 {% block body %}
     {# Display a form #}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Agregar Productos</h2>
+            <br>
+        </div>
+    </div>
+
     <form action="" method="post" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
@@ -18,7 +25,7 @@
         {% endbuttons %}
     </form>
 
-        <br><br>
+    <br><br>
 
     <div class="row">
         <div class="col-lg-12">
