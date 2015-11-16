@@ -16,7 +16,7 @@ def main(request):
     return render(request, 'ventas/index.html')
 
 
-def ClienteNuevo(request):
+def ClienteAlta(request):
     """
     Vista para agregar nuevos clientes
     """
@@ -66,9 +66,43 @@ def ClienteEliminar(request, pk):
     cliente.delete()
     return HttpResponseRedirect(reverse('ventas:clientes_consultar'))
 
+def VentaAlta(request):
+    if request.method == 'POST':
+        form = forms.VentaForm(request.POST)
+        if form.is_valid():
+            venta = form.save()
+            return HttpResponseRedirect(reverse('ventas:agregar_producto', args=(venta.pk,)))
+        else:
+            return render(request, 'ventas/ventas/agregar.html', {'form': form})
+    else:
+        form = forms.VentaForm()
+    return render(request, 'ventas/ventas/agregar.html', {'form': form})
 
+def VentaConsultar(request):
+    ventas = models.Venta.objects.all()
+    return render(request, 'ventas/ventas/consultar.html', {'ventas' : ventas})
 
+def VentaDetalle(request, pk):
+    try:
+        venta = models.Venta.objects.get(pk=pk)
+        detalles = venta.detalleventa_set.all()
+    except models.Venta.DoesNotExist:
+        raise Http404('Este detalle no existe')
+    return render(request, 'ventas/ventas/detalle.html', {'detalles' : detalles,'venta' : venta})
 
-
-
-
+def DetalleVentaProducto(request, pk):
+    if request.method == 'POST':
+        venta = models.Venta.objects.get(pk=pk)
+        form = forms.DetalleVentaProductoForm(request.POST)
+        if form.is_valid():
+            ventaproducto = form.save(commit=False)
+            ventaproducto.venta = venta
+            ventaproducto.save()            
+            venta = models.Venta.objects.get(pk=pk)
+            detalles = venta.detalleventa_set.all()
+            return render(request, 'ventas/ventas/agregar_producto.html', {'form': form,'detalles' : detalles,'venta' : venta})
+        else:
+            return render(request, 'ventas/ventas/agregar_producto.html', {'form': form,'detalles' : detalles,'venta' : venta})
+    else:
+        form = forms.DetalleVentaProductoForm()
+    return render(request, 'ventas/ventas/agregar_producto.html', {'form': form})

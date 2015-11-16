@@ -6,11 +6,14 @@ class Venta(models.Model):
     num_factura = models.IntegerField()
     fecha = models.DateTimeField(auto_now=True)
     cliente = models.ForeignKey('ventas.Cliente', null=True)
-    total = models.DecimalField(decimal_places=4, max_digits=10)
-    status = models.IntegerField()
+    total = models.DecimalField(decimal_places=4, max_digits=10, null=True)
+    status = models.IntegerField(null=True)
 
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.pk)
 
 
 class DetalleVenta(models.Model):
@@ -21,10 +24,16 @@ class DetalleVenta(models.Model):
 
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
+    
+    @property
+    def subtotal(self):
+        return self.cantidad * self.precio
+    
+    def __str__(self):
+        return str(self.venta)
 
 
 class Cliente(models.Model):
-    num_cliente = models.CharField(null=False, max_length=50)
     nombre = models.CharField(null=False, max_length=100)
     rfc = models.CharField(null=False, max_length=50)
     direccion = models.CharField(null=False, max_length=100)

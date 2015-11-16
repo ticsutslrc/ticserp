@@ -5,7 +5,18 @@ Principal
 {% endblock %}
 
 {% block body %}
-    <h1>Hola mundo yo soy ventas</h1>
-    <a href="{% url 'ventas:clientes_consultar' %}" class="btn btn-success">Consultar Clientes</a>
-    <a href="{% url 'ventas:clientes_nuevo' %}" class="btn btn-success">Agregar Cliente</a>
+    <div>
+    	<h1>Hola mundo yo soy ventas</h1>
+	    <div>
+	    	<h2>Clientes</h2>
+		    <a href="{% url 'ventas:clientes_consultar' %}" class="btn btn-success">Consultar Clientes</a>
+		    <a href="{% url 'ventas:clientes_alta' %}" class="btn btn-success">Agregar Cliente</a>
+	    </div>
+	    <div>
+	    	<h2>Ventas</h2>
+		    <a href="{% url 'ventas:ventas_consultar' %}" class="btn btn-success">Consultar Ventas</a>
+		    <a href="{% url 'ventas:ventas_alta' %}" class="btn btn-success">Agregar Venta</a>
+	    </div>
+    </div>
+
 {% endblock %}
