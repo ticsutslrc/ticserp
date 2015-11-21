@@ -9,7 +9,6 @@ class ProveedorForm(ModelForm):
         model = models.Proveedor
         fields = [
             'nombre',
-            'responsable',
             'direccion',
             'ciudad',
             'estado',

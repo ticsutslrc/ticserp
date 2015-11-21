@@ -49,7 +49,8 @@
                             <td>{{ detalle.producto }} </td>
                             <td>{{ detalle.cantidad }} </td>   
                             <td>{{ detalle.precio }} </td> 
-                            <td>{{ detalle.subtotal }} </td>                                      
+                            <td>{{ detalle.subtotal }} </td>  
+                            <td><button class="btn btn-danger" onclick="window.location='{% url 'ventas:detalleventa_eliminar' pk=detalle.pk %}'">Eliminar</button></td>                                                        
                         </tr>
                     {% endfor %}
                 {% else %}
@@ -61,5 +62,12 @@
             </table>
         </div>
     </div>
+
+    <div>
+        <b>Total: </b>{{ total }}
+        <br><br>
+        <button class="btn btn-success" onclick="window.location='{% url 'ventas:ventas_reporte' pk=venta.pk %}'">Imprimir</button>
+        <button class="btn btn-primary" onclick="window.location='{% url 'ventas:ventas_consultar' %}'">Finalizar</button>
+    </div> 
 
 {% endblock %}

@@ -11,9 +11,6 @@
         <div class="col-lg-6">
             <h2>Detalle Venta</h2>
         </div>
-        <div class="col-lg-6">
-            <a href="{% url 'ventas:ventas_alta' %}" class="btn btn-success btn-small pull-right">Agregar Producto</a>
-        </div>
     </div>
 
     <div class="row">
@@ -51,6 +48,11 @@
         </div>
     </div>
 
+    <div>
+        <b>Total: </b>{{ total }}
+        <br><br>
+        <button class="btn btn-success" onclick="window.location='{% url 'ventas:ventas_reporte' pk=venta.pk %}'">Imprimir</button>
+    </div> 
 
 
 {% endblock %}

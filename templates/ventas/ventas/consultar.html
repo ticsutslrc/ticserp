@@ -29,10 +29,14 @@
                 <tbody>
                 {% if ventas %}
                     {% for venta in ventas %}
-                        <tr onclick="window.location='{% url 'ventas:ventas_detalle' pk=venta.pk %}'">
+                        <tr>
                             <td>{{ venta.num_factura }} </td>
                             <td>{{ venta.cliente }} </td>
-                            <td>{{ venta.fecha }} </td>                     
+                            <td>{{ venta.fecha }} </td>
+                            <td>
+                            <button class="btn btn-primary" onclick="window.location='{% url 'ventas:ventas_detalle' pk=venta.pk %}'">Ver Detalle</button>
+                            <button class="btn btn-danger" onclick="window.location='{% url 'ventas:ventas_eliminar' pk=venta.pk %}'">Eliminar</button>
+                            </td>                     
                         </tr>
                     {% endfor %}
                 {% else %}
