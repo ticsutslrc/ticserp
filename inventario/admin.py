@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import Producto
 
-# Register your models here.
+# Importar modelos de Inventario
+from .models import Producto
+from .models import Material
+from .models import DetalleProductosMaterial
+from .models import MovimientoInventarioMaterial
+from .models import MovimientoInventarioProduto
+
+# Registrar modelos para que aparescan en interfaz de administracion
 admin.site.register(Producto)
+admin.site.register(Material)
+admin.site.register(DetalleProductosMaterial)
+admin.site.register(MovimientoInventarioMaterial)
+admin.site.register(MovimientoInventarioProduto)
