@@ -68,6 +68,7 @@
                 <thead>
                 <tr>
                     <th>Lote</th>
+					<th>id venta</th>
                     <th>nombre_articulo</th>
                     <th>cantidad</th>
                     <th>status</th>
@@ -81,6 +82,7 @@
                     {% for planeacion in planeacion %}
                         <tr>
                             <td>{{ planeacion.id_lote }} </td>
+							<td>{{ planeacion.id_venta }} </td>
                             <td>{{ planeacion.nombre_articulo }} </td>
                             <td>{{ planeacion.cantidad }} </td>
                             <td>{{ planeacion.status }} </td>

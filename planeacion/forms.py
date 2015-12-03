@@ -9,6 +9,7 @@ class nuevaOrdenForm(ModelForm):
         model = models.planeacion
         fields = [
             'id_lote',
+			'id_venta',
             'nombre_articulo',
             'cantidad',
             'status',
