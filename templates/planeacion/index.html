@@ -1,43 +1,67 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block title %}
-Principal
+    Principal
 {% endblock %}
 
 {% block body %}
     <h1>planeacion</h1>
 
     <div class="modal fade" id="modal1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Nueva orden de produccion</h4>
-      </div>
-      <div class="modal-body">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Nueva orden de produccion</h4>
+                </div>
+                <div class="modal-body">
 
-            <form action="" method="post" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">
-                {% bootstrap_icon "star" %} Guardar
-            </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        {% endbuttons %}
-    </form>
-      </div>
-      <div class="modal-footer">
+                    <form action="" method="post" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">
+                                {% bootstrap_icon "star" %} Guardar
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+                <div class="modal-footer">
 
 
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    <div class="col-lg-4">
+    <h3>Agregar orden</h3>
+        <br><br>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
+            +Nueva Orden
+        </button>
+    </div>
+    <div class="col-lg-4">
+        <h3>Consulta individual</h3>
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
-  +Nueva Ordena
-</button>
+        <label>Folio: </label><input type="text" class="form-control" id="folio1">
+        <button class="btn btn-success" name="cambiar status" data-toggle="modal" data-target="#myModal" onclick="dos()">Consultar</button>
+
+    </div>
+
+        <div class="col-lg-4">
+        <h3>Cambiar status</h3>
+
+        <label>Folio: </label><input type="text" class="form-control" id="folio2">
+        <button class="btn btn-success" name="cambiarstatus" data-toggle="modal" data-target="#modal2" onclick="uno()">Cambiar status</button>
+
+    </div>
+ <div class="col-lg-12">
+ <br><br><br>
+ </div>
+    <form>
+
+    </form>
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-hover">
@@ -45,13 +69,11 @@ Principal
                 <tr>
                     <th>Lote</th>
                     <th>nombre_articulo</th>
-                    <th>piezas</th>
                     <th>cantidad</th>
                     <th>status</th>
-                    <th>progreso</th>
-                    <th>fecha_inicio</th>
-                    <th>fecha_fin</th>
-                    <th>fecha_terminacion</th>
+                    <th>fecha inicio</th>
+                    <th>fecha creacion</th>
+                    <th>fecha entrega</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,13 +82,11 @@ Principal
                         <tr>
                             <td>{{ planeacion.id_lote }} </td>
                             <td>{{ planeacion.nombre_articulo }} </td>
-                            <td>{{ planeacion.piezas }} </td>
                             <td>{{ planeacion.cantidad }} </td>
                             <td>{{ planeacion.status }} </td>
-                            <td>{{ planeacion.progreso }} </td>
                             <td>{{ planeacion.fecha_inicio }} </td>
-                            <td>{{ planeacion.fecha_fin }} </td>
-                            <td>{{ planeacion.fecha_terminacion }} </td>
+                            <td>{{ planeacion.fecha_creacion }} </td>
+                            <td>{{ planeacion.fecha_entrega }} </td>
 
 
                         </tr>
@@ -79,5 +99,64 @@ Principal
                 </tbody>
             </table>
         </div>
+
+
+
+        <!--<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Cambiar status</button>-->
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Consulta individual</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <iframe src="" frameborder="0" allowtransparency="true" width="500" height="300" id="iframe1"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+
+              <div class="modal fade" id="modal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Cambiar status</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src='' frameborder="0" allowtransparency="true" width="500" height="500" id="iframe2"></iframe>
+                </div>
+                <div class="modal-footer">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function uno(){
+            document.getElementById('iframe2').src='cambiar_status2/'+document.getElementById('folio2').value;
+
+        }
+                function dos(){
+            document.getElementById('iframe1').src='cambiar_status/'+document.getElementById('folio1').value;
+
+
+        }
+
+</script>
 
 {% endblock %}

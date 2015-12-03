@@ -1,23 +1,22 @@
 from django.db import models
 
 
-# Create your models here.
+
 class planeacion(models.Model):
-    id_lote = models.CharField(max_length=30)
-    nombre_articulo = models.CharField(max_length=100)
-    piezas = models.CharField(max_length=30)
-    cantidad = models.CharField(max_length=30)
-    status = models.CharField(max_length=30)
-    progreso = models.CharField(max_length=30)
+    id_lote = models.AutoField(primary_key=True)#id venta
+    nombre_articulo = models.CharField(max_length=100)#relacion con articulo
+    cantidad = models.IntegerField()
+    status = models.CharField(max_length=15, choices=(
+        ('1', 'Cancelado'),
+        ('2', 'Iniciado'),
+        ('3', 'Sin iniciar'),
+    ), default='3')
     fecha_inicio = models.DateTimeField()
-    fecha_fin = models.DateTimeField()
-    fecha_terminacion = models.DateTimeField()
+    fecha_creacion = models.DateTimeField()#auto
+    fecha_entrega = models.DateTimeField()
 
 
 
-class modelos(models.Model):
-    id_modelo = models.CharField(max_length=30)
-    cantidad = models.CharField(max_length=30)
-    piezas = models.CharField(max_length=30)
+
 
 

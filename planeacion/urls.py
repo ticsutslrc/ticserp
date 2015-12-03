@@ -7,6 +7,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.main, name='main'),
-    url(r'^agregar$', views.nuevaOrden, name='nueva_orden'),
+    url(r'^index', views.nuevaOrden, name='nueva_orden'),
     url(r'^mostrar$', views.consultar, name='mostrar'),
+    url(r'^cambiar_status/(?P<pk>[0-9]+)$', views.cambiar_status, name='cambiar_status'),
+    url(r'^cambiar_status2/(?P<pk>[0-9]+)$', views.cambiar_status2, name='cambiar_status2'),
+
 ]

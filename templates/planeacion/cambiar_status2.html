@@ -1,0 +1,23 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<form action="" method="post" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                            <button type="submit" class="btn btn-primary">
+                                {% bootstrap_icon "star" %} Guardar
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        {% endbuttons %}
+                    </form>
+</body>
+</html>

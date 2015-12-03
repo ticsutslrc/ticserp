@@ -1,0 +1,17 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+                            <p>Lote:            {{ consulta.id_lote }}</p>
+                            <p>Articulo:        {{ consulta.nombre_articulo }} </p>
+                            <p>Cantidad:        {{ consulta.cantidad }} </p>
+                            <p>Status:          {{ consulta.status }} </p>
+                            <p>Fecha inicio:    {{ consulta.fecha_inicio }} </p>
+                            <p>Fecha creacion:  {{ consulta.fecha_creacion }} </p>
+                            <p>Fecha entrega:   {{ consulta.fecha_entrega }} </p>
+
+</body>

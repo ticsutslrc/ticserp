@@ -7,10 +7,8 @@ from . import models
 
 # Create your views here.
 def main(request):
-    """
-    Vista principal
-    """
-    return render(request, 'planeacion/index.html')
+
+    return render(request, 'planeacion/main.html')
 
 
 
@@ -32,6 +30,31 @@ def nuevaOrden(request):
 def consultar(request):
     planeacion = models.planeacion.objects.all()
     return render(request, 'planeacion/mostrar.html', {'planeacion': planeacion})
+
+
+def cambiar_status(request, pk):
+    query = get_object_or_404(models.planeacion, pk=pk)
+
+    return render(request, 'planeacion/cambiar_status.html', {'consulta': query})
+
+def cambiar_status2(request, pk):
+
+    query = get_object_or_404(models.planeacion, pk=pk)
+    if request.method == 'POST':
+        form = forms.status(request.POST, instance=query)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.INFO, 'Status modificado')
+            return HttpResponseRedirect(reverse('planeaccion:main'))
+        else:
+            return render(request, 'planeacion/cambiar_status2.html', {'form': form})
+    else:
+        form = forms.nuevaOrdenForm(instance=query)
+    return render(request, 'planeacion/cambiar_status2.html', {'form': form})
+
+
+
+
 
 
 
