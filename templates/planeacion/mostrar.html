@@ -1,43 +1,18 @@
 {% extends 'base.html' %}
+{# Cargar la libreria de bootstrap form #}
 {% load bootstrap3 %}
+
 {% block title %}
-Principal
+    Ordenes
 {% endblock %}
 
 {% block body %}
-    <h1>planeacion</h1>
-
-    <div class="modal fade" id="modal1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Nueva orden de produccion</h4>
-      </div>
-      <div class="modal-body">
-
-            <form action="" method="post" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">
-                {% bootstrap_icon "star" %} Guardar
-            </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        {% endbuttons %}
-    </form>
-      </div>
-      <div class="modal-footer">
-
-
-      </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Consultar ordenes</h2>
+        </div>
     </div>
-  </div>
-</div>
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">
-  +Nueva Ordena
-</button>
     <div class="row">
         <div class="col-lg-12">
             <table class="table table-hover">
@@ -79,5 +54,8 @@ Principal
                 </tbody>
             </table>
         </div>
+    </div>
+
+
 
 {% endblock %}
