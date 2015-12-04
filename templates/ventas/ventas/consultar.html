@@ -24,6 +24,10 @@
                     <th>Numero Factura</th>
                     <th>Cliente</th>
                     <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,10 +37,13 @@
                             <td>{{ venta.num_factura }} </td>
                             <td>{{ venta.cliente }} </td>
                             <td>{{ venta.fecha }} </td>
+                            <td>{{ venta.producto.nombre }} </td>
+                            <td>{{ venta.precio }} </td>
+                            <td>{{ venta.cantidad }} </td>
+                            <td>{{ venta.total }} </td>
                             <td>
-                            <button class="btn btn-primary" onclick="window.location='{% url 'ventas:ventas_detalle' pk=venta.pk %}'">Ver Detalle</button>
                             <button class="btn btn-danger" onclick="window.location='{% url 'ventas:ventas_eliminar' pk=venta.pk %}'">Eliminar</button>
-                            </td>                     
+                            </td>                  
                         </tr>
                     {% endfor %}
                 {% else %}
@@ -49,6 +56,9 @@
         </div>
     </div>
 
-
+    <div>
+        <br><br>
+        <button class="btn btn-success" onclick="window.location='{% url 'ventas:ventas_reporte' %}'">Imprimir</button>
+    </div> 
 
 {% endblock %}

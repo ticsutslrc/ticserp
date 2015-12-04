@@ -32,7 +32,7 @@
                         <tr onclick="window.location='{% url 'ventas:ventas_detalle' pk=venta.pk %}'">
                             <td>{{ venta.num_factura }} </td>  
                             <td>{{ detalle.pk }} </td>
-                            <td>{{ detalle.producto }} </td>
+                            <td>{{ detalle.producto.nombre }} </td>
                             <td>{{ detalle.cantidad }} </td>   
                             <td>{{ detalle.precio }} </td>  
                             <td>{{ detalle.subtotal }} </td>                     

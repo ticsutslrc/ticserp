@@ -25,17 +25,8 @@ class VentaForm(ModelForm):
         model = models.Venta
         fields = [
             'num_factura',
-            'cliente'
-        ]
-
-
-class DetalleVentaProductoForm(ModelForm):
-    class Meta:
-        model = models.DetalleVenta
-        fields = [
+            'cliente',
             'producto',
             'precio',
             'cantidad'
-        ] 
-        exclude = ['venta']
-    
+        ]

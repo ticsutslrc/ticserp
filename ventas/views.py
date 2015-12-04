@@ -15,7 +15,6 @@ from reportlab.platypus import Table
 from . import forms
 from . import models
 from .models import Cliente
-from .models import DetalleVenta
 
 from django.db.models import Sum
 from django.db.models import F
@@ -28,10 +27,8 @@ def main(request):
     return render(request, 'ventas/index.html')
 
 
+# Vista para agregar clientes
 def ClienteAlta(request):
-    """
-    Vista para agregar nuevos clientes
-    """
     if request.method == 'POST':
         form = forms.ClienteForm(request.POST or None)
         if form.is_valid():
@@ -45,18 +42,14 @@ def ClienteAlta(request):
     return render(request, 'ventas/clientes/agregar.html', {'form': form})
 
 
+# Vista para consultar clientes
 def ClienteConsultar(request):
-    """
-    Vista para consultar clientes
-    """
     clientes = models.Cliente.objects.all()
     return render(request, 'ventas/clientes/consultar.html', {'clientes' : clientes})
 
 
+# Vista para editar clientes
 def ClienteEditar(request, pk):
-    """
-    Vista para editar clientes
-    """
     cliente = get_object_or_404(models.Cliente, pk=pk)
     if request.method == 'POST':
         form = forms.ClienteForm(request.POST, instance=cliente)
@@ -70,73 +63,43 @@ def ClienteEditar(request, pk):
         form = forms.ClienteForm(instance=cliente)
     return render(request, 'ventas/clientes/agregar.html', {'form': form})
 
+
+# Vista para eliminar clientes
 def ClienteEliminar(request, pk):
-    """
-    Vista para eliminar clientes
-    """
     cliente = get_object_or_404(models.Cliente, pk=pk)
     cliente.delete()
     return HttpResponseRedirect(reverse('ventas:clientes_consultar'))
 
+
+# Vista para agregar ventas
 def VentaAlta(request):
     if request.method == 'POST':
         form = forms.VentaForm(request.POST)
         if form.is_valid():
             venta = form.save()
-            return HttpResponseRedirect(reverse('ventas:agregar_producto', args=(venta.pk,)))
+            messages.add_message(request, messages.INFO, 'Venta agregada con exito')
+            return HttpResponseRedirect(reverse('ventas:ventas_consultar'))
         else:
             return render(request, 'ventas/ventas/agregar.html', {'form': form})
     else:
         form = forms.VentaForm()
     return render(request, 'ventas/ventas/agregar.html', {'form': form})
 
+
+# Vista para consultar ventas
 def VentaConsultar(request):
     ventas = models.Venta.objects.all()
     return render(request, 'ventas/ventas/consultar.html', {'ventas' : ventas})
 
-def VentaDetalle(request, pk):
-    try:
-        venta = models.Venta.objects.get(pk=pk)
-        detalles = venta.detalleventa_set.all()
-        total = models.DetalleVenta.objects.filter(venta=pk).aggregate(total=Sum(F('precio') * F('cantidad')))['total']
-    except models.Venta.DoesNotExist:
-        raise Http404('Este detalle no existe')
-    return render(request, 'ventas/ventas/detalle.html', {'detalles' : detalles,'venta' : venta,'total' : total})
 
-def AgregarProductoDetalleVenta(request, pk):
-    if request.method == 'POST':
-        venta = models.Venta.objects.get(pk=pk)
-        form = forms.DetalleVentaProductoForm(request.POST)
-        if form.is_valid():
-            ventaproducto = form.save(commit=False)
-            ventaproducto.venta = venta
-            ventaproducto.save()            
-            venta = models.Venta.objects.get(pk=pk)
-            detalles = venta.detalleventa_set.all()
-            total = models.DetalleVenta.objects.filter(venta=pk).aggregate(total=Sum(F('precio') * F('cantidad')))['total']
-            return render(request, 'ventas/ventas/agregar_producto.html', {'form': form,'detalles' : detalles,'venta' : venta,'total' : total})
-        else:
-            return render(request, 'ventas/ventas/agregar_producto.html', {'form': form,'detalles' : detalles,'venta' : venta,'total' : total})
-    else:
-        form = forms.DetalleVentaProductoForm()
-        venta = models.Venta.objects.get(pk=pk)
-        detalles = venta.detalleventa_set.all()
-        total = models.DetalleVenta.objects.filter(venta=pk).aggregate(total=Sum(F('precio') * F('cantidad')))['total']
-    return render(request, 'ventas/ventas/agregar_producto.html', {'form': form,'detalles' : detalles,'venta' : venta,'total' : total})
-
-
+# Vista para eliminar ventas
 def VentaEliminar(request, pk):
     venta = get_object_or_404(models.Venta, pk=pk)
     venta.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 
-def DetalleVentaEliminar(request, pk):
-    detalle = get_object_or_404(models.DetalleVenta, pk=pk)
-    detalle.delete()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
-
-
+# Vista para generar reporte de clientes
 def generar_pdf_clientes(request):
     print ("Genero el PDF");
     response = HttpResponse(content_type='application/pdf')
@@ -174,8 +137,8 @@ def generar_pdf_clientes(request):
     return response
 
 
-
-def generar_pdf_ventas(request,pk):
+# Vista para generar reporte de ventas
+def generar_pdf_ventas(request):
     print ("Genero el PDF");
     response = HttpResponse(content_type='application/pdf')
     pdf_name = "ventas.pdf"  # llamado clientes
@@ -191,23 +154,10 @@ def generar_pdf_ventas(request,pk):
                             )
     ventas = []
     styles = getSampleStyleSheet()
-    header = Paragraph("Venta - Detalle", styles['Heading1'])
+    header = Paragraph("Listado De ventas", styles['Heading1'])
     ventas.append(header)
-
-
-    datosVenta = models.Venta.objects.get(pk=pk)
-    numeroVenta = Paragraph("NUMERO VENTA: " + str(datosVenta.num_factura), styles['Heading3'])
-    ventas.append(numeroVenta)
-
-    clienteVenta = Paragraph("CLIENTE: " + str(datosVenta.cliente), styles['Heading3'])
-    ventas.append(clienteVenta)
-
-    fechaVenta = Paragraph("FECHA: " + str(datosVenta.fecha), styles['Heading3'])
-    ventas.append(fechaVenta)
-
-
-    headings = ('Producto','Cantidad','Precio','SubTotal')
-    allventas = [(p.producto, p.cantidad, p.precio, p.subtotal) for p in DetalleVenta.objects.filter(venta=pk)]
+    headings = ('Num. Factura','Cliente','Fecha','Producto','Cantidad','Precio','Total')
+    allventas = [(p.num_factura, p.cliente, p.fecha.strftime("%d-%m-%Y"), p.producto.nombre, p.cantidad, p.precio, p.total) for p in models.Venta.objects.all()]
     print (allventas);
 
     t = Table([headings] + allventas)
@@ -219,13 +169,6 @@ def generar_pdf_ventas(request,pk):
         ]
     ))
     ventas.append(t)
-
-
-    datoTotal = models.DetalleVenta.objects.filter(venta=pk).aggregate(total=Sum(F('precio') * F('cantidad')))['total']
-    totalVenta = Paragraph("TOTAL: " + str(datoTotal), styles['Heading3'])
-    ventas.append(totalVenta)
-
-
     doc.build(ventas)
     response.write(buff.getvalue())
     buff.close()

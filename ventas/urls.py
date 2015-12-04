@@ -15,11 +15,7 @@ urlpatterns = [
     
     url(r'^ventas/$', views.VentaConsultar, name='ventas_consultar'),
     url(r'^ventas/alta$', views.VentaAlta, name='ventas_alta'),
-    url(r'^ventas/detalle/(?P<pk>\d+)/', views.VentaDetalle, name='ventas_detalle'),
-    url(r'^ventas/agregar_producto/(?P<pk>\d+)/', views.AgregarProductoDetalleVenta, name='agregar_producto'),
-    url(r'^ventas/reporte/(?P<pk>\d+)/', views.generar_pdf_ventas, name='ventas_reporte'),
-
+    url(r'^ventas/reporte$', views.generar_pdf_ventas, name='ventas_reporte'),
     url(r'^ventas/eliminar/(?P<pk>\d+)/', views.VentaEliminar, name='ventas_eliminar'),
-    url(r'^ventas/agregar_producto/eliminar/(?P<pk>\d+)/', views.DetalleVentaEliminar, name='detalleventa_eliminar'),
 
 ]

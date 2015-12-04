@@ -6,31 +6,25 @@ class Venta(models.Model):
     num_factura = models.IntegerField()
     fecha = models.DateTimeField(auto_now=True)
     cliente = models.ForeignKey('ventas.Cliente', null=True)
-    total = models.DecimalField(decimal_places=4, max_digits=10, null=True)
-    status = models.IntegerField(null=True)
+
+    producto = models.ForeignKey('inventario.Producto', null=False)
+    precio = models.DecimalField(decimal_places=4, max_digits=10)
+    cantidad = models.IntegerField()
 
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
+
+    compras = models.BooleanField(default=False)
+    produccion = models.BooleanField(default=False)
+    planeacion = models.BooleanField(default=False)
+    inventario = models.BooleanField(default=False)
+
+    @property
+    def total(self):
+        return self.cantidad * self.precio
 
     def __str__(self):
         return str(self.pk)
-
-
-class DetalleVenta(models.Model):
-    venta = models.ForeignKey('ventas.Venta',null=True)
-    producto = models.ForeignKey('inventario.Producto', null=False)
-    cantidad = models.IntegerField()
-    precio = models.DecimalField(decimal_places=4, max_digits=10)
-
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_modificacion = models.DateTimeField(auto_now=True)
-    
-    @property
-    def subtotal(self):
-        return self.cantidad * self.precio
-    
-    def __str__(self):
-        return str(self.venta)
 
 
 class Cliente(models.Model):
