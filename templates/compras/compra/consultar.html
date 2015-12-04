@@ -24,9 +24,6 @@
                     <th>No. Compra</th>
                     <th>Fecha Modificacion</th>
                     <th>Status</th>
-                    <th>Material</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
                     <th>Total</th>
                     <th>Proveedor</th>
                     <th>Fecha Creacion</th>
@@ -35,16 +32,14 @@
                 <tbody>
                 {% if compras %}
                     {% for compra in compras %}
-                        <tr onclick="window.location='{% url 'compras:compra_modificar' pk=compra.pk %}'">
+                        <tr onclick="window.location='{% url 'compras:compradetalle_consultar' pk=compra.pk %}'">
                             <td>{{ compra.num_compra }} </td>
                             <td>{{ compra.fecha_modificacion }} </td>
                             <td>{{ compra.status }} </td>
-                            <td>{{ compra.material }} </td>
-                            <td>{{ compra.cantidad }} </td>
-                            <td>{{ compra.precio }} </td>
                             <td>{{ compra.total }} </td>
-                            <td>{{ compra.proveedor.nombre }} </td>
-                            <td>{{ compra.fecha_creacion }}
+                            <td>{{ compra.proveedor}} </td>
+                            <td>{{ compra.fecha_creacion }}</td>
+                            <td><a href= "{% url 'compras:borrar_compra' compra.pk %}"  class="btn btn-danger">Eliminar</a></td>
                         </tr>
                     {% endfor %}
                 {% else %}
@@ -57,6 +52,6 @@
         </div>
     </div>
 
-
+<a href="{% url 'compras:compra_reporte' %}" class="btn btn-success btn-small pull-right">Imprimir</a>
 
 {% endblock %}

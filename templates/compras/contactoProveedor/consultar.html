@@ -38,7 +38,8 @@
                             <td>{{ ContactoProveedor.telefono }} </td>
                             <td>{{ ContactoProveedor.correo }} </td>
                             <td>{{ ContactoProveedor.proveedor.nombre }} </td>
-                            <td>{{ ContactoProveedor.fecha_creacion }}
+                            <td>{{ ContactoProveedor.fecha_creacion }}</td>
+                            <td><a href= "{% url 'compras:borrar_contacto' ContactoProveedor.pk %}"  class="btn btn-danger">Eliminar</a></td>
                         </tr>
                     {% endfor %}
                 {% else %}
@@ -51,6 +52,6 @@
         </div>
     </div>
 
-
+<a href="{% url 'compras:contacto_reporte' %}" class="btn btn-success btn-small pull-right">Imprimir</a>
 
 {% endblock %}

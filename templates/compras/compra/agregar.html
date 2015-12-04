@@ -15,8 +15,10 @@
             <button type="submit" class="btn btn-primary">
                 {% bootstrap_icon "star" %} Guardar
             </button>
-
+            
         {% endbuttons %}
     </form>
-    <a href="../"><button class="btn btn-primary">Salir</button></a>
+    <a href="{% url 'compras:compra_consultar' %}"><button class="btn btn-primary btn-small pull-right">
+                Salir
+            </button></a>
 {% endblock %}

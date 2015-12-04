@@ -18,30 +18,38 @@ class Proveedor(models.Model):
 	fecha_creacion = models.DateTimeField(auto_now_add=True, null = True, blank=True)
 	fecha_modificacion = models.DateTimeField(auto_now=True, null = True, blank=True)
 
-
 	def __str__(self):
 		return self.nombre
+
 
 class Compra(models.Model):
 	num_compra = models.IntegerField(default=0)
 	status = models.BooleanField(default=False)
-
-	material = models.CharField(null=True, max_length=100)
-	cantidad = models.IntegerField(default=0)
-	precio = models.DecimalField(null=True,decimal_places=2, max_digits=10)
-
 	total = models.DecimalField(decimal_places=2, max_digits=10)
 	proveedor = models.ForeignKey(Proveedor,null=True)
 
 	fecha_creacion = models.DateTimeField(auto_now_add=True, null = True, blank=True)
 	fecha_modificacion = models.DateTimeField(auto_now=True, null = True, blank=True)
 
+	def __str__(self):
+		return str(self.pk)
+
+
 class DetalleCompra(models.Model):
-	material = models.CharField(null=False, max_length=100)
+	material = models.ForeignKey('inventario.Material', null=True)
 	cantidad = models.IntegerField(default=0)
 	precio = models.DecimalField(decimal_places=2, max_digits=10)
 
 	compra = models.ForeignKey(Compra,null=True)
+
+	@property
+	def subtotal(self):
+		return self.cantidad * self.precio
+	
+
+	def __str__(self):
+		return str(self.compra)
+    
 
 class ContactoProveedor(models.Model):
 	nombre = models.CharField(null=False, max_length=100)
