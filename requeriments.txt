@@ -1,2 +1,6 @@
 django
 django-bootstrap3
+djangorestframework
+markdown
+django-filter
+reportlab

@@ -32,6 +32,7 @@ INSTALLED_APPS = (
 
     # Librerias
     'bootstrap3',
+    'rest_framework',
 
     # Apps del ERP
     'mainapp',
