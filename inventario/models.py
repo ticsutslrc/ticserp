@@ -263,7 +263,7 @@ class Material(models.Model):
     cantidad_minimo_almacen = models.PositiveIntegerField(default=5)
 
     # Campos de relacion con proveedor
-    proveedor = models.ForeignKey('compras.Proveedor', null=False)
+    # proveedor = models.ForeignKey('compras.Proveedor', null=False)
 
     # Para guardar cualquier comentario que fuese necesario
     comentarios = models.TextField(blank=True)
@@ -276,11 +276,11 @@ class Material(models.Model):
         """
         Define la salida en string de este modelo
         """
-        return '<Material> Nombre: {0} Stock: {1} Costo: {2} Proveedor: {3}'.format(
+        return '<Material> Nombre: {0} Stock: {1} Costo: {2} Proveedor: '.format(
             self.nombre.encode('utf8'),
             self.cantidad_total_almacen,
             self.ultimo_costo,
-            self.proveedor.nombre,
+            #self.proveedor.nombre,
         )
 
     class Meta:
