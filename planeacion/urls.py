@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^mostrar$', views.consultar, name='mostrar'),
     url(r'^cambiar_status/(?P<pk>[0-9]+)$', views.cambiar_status, name='cambiar_status'),
     url(r'^cambiar_status2/(?P<pk>[0-9]+)$', views.cambiar_status2, name='cambiar_status2'),
+    url(r'^crear_orden/(?P<factura>[0-9]+?P<producto>[0-9]+?P<cantidad>[0-9]+)$', views.crear_orden_produccion, name='crear_orden_produccion'),
 
 ]

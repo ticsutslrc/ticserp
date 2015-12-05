@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from . import forms
 from . import models
+from ventas.models import Venta
 
+#from ventas import models
 
 # Create your views here.
 def main(request):
@@ -29,7 +31,10 @@ def nuevaOrden(request):
 
 def consultar(request):
     planeacion = models.planeacion.objects.all()
-    return render(request, 'planeacion/mostrar.html', {'planeacion': planeacion})
+    ventas = get_object_or_404(Venta, planeacion=False)
+
+    return render(request, 'planeacion/mostrar.html', {'planeacion': planeacion,'ventas': ventas})
+
 
 
 def cambiar_status(request, pk):
@@ -51,6 +56,10 @@ def cambiar_status2(request, pk):
     else:
         form = forms.nuevaOrdenForm(instance=query)
     return render(request, 'planeacion/cambiar_status2.html', {'form': form})
+
+def crear_orden_produccion(request, factura, producto, cantidad):
+
+    return render_to_response('ddd')
 
 
 

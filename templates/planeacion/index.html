@@ -66,6 +66,7 @@
         <div class="col-lg-12">
             <table class="table table-hover">
                 <thead>
+                <tr><h1>Ordenes de compra</h1></tr>
                 <tr>
                     <th>Lote</th>
 					<th>id venta</th>
@@ -103,6 +104,40 @@
         </div>
 
 
+<!--Template ventas inicio-->
+    <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                <tr><h1>Ventas pendintes de orden de compra</h1></tr>
+                <tr>
+                    <th>Factura</th>
+					<th>fecha</th>
+                    <th>producto</th>
+                    <th>cantidad</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if ventas %}
+                    {% for ventas in ventas %}
+                        <tr>
+                            <td>{{ ventas.num_factura }} </td>
+							<td>{{ ventas.fecha }} </td>
+                            <td>{{ ventas.producto }} </td>
+                            <td>{{ ventas.cantidad }} </td>
+                            <td><button class="btn btn-primary" onclick="window.location='{% url 'planeaccion:crear_orden_produccion' factura=ventas.num_factura producto=ventas.producto cantidad=ventas.cantidad %}'">Generar Orden de produccion</button> </td>
+
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <p>Ningun registro</p>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+<!--Template ventas fin-->
 
         <!--<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Cambiar status</button>-->
 
