@@ -6,11 +6,16 @@ Principal
 
 {% block body %}
     <div>
-    	<h1>Hola mundo yo soy ventas</h1>
+    	<h1>Modulo Ventas</h1>
 	    <div>
 	    	<h2>Clientes</h2>
 		    <a href="{% url 'ventas:clientes_consultar' %}" class="btn btn-success">Consultar Clientes</a>
 		    <a href="{% url 'ventas:clientes_alta' %}" class="btn btn-success">Agregar Cliente</a>
+	    </div>
+	    <div>
+	    	<h2>Contactos</h2>
+		    <a href="{% url 'ventas:contacto_clientes_consultar' %}" class="btn btn-success">Consultar Contactos</a>
+		    <a href="{% url 'ventas:contacto_clientes_alta' %}" class="btn btn-success">Agregar Contacto</a>
 	    </div>
 	    <div>
 	    	<h2>Ventas</h2>

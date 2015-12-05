@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{# Cargar la libreria de bootstrap form #}
+{% load bootstrap3 %}
+
+{% block title %}
+    Consultar Contactos
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Consultar Contactos</h2>
+        </div>
+        <div class="col-lg-6">
+            <a href="{% url 'ventas:contacto_clientes_alta' %}" class="btn btn-success btn-small pull-right">Agregar Contacto</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Puesto</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Cliente</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if contactoClientes %}
+                    {% for contactoCliente in contactoClientes %}
+                        <tr>
+                            <td>{{ contactoCliente.nombre }} </td>
+                            <td>{{ contactoCliente.puesto }} </td>
+                            <td>{{ contactoCliente.telefono }} </td>
+                            <td>{{ contactoCliente.correo }} </td>
+                            <td>{{ contactoCliente.cliente.nombre }} </td>
+                            <td>
+                            <button class="btn btn-primary" onclick="window.location='{% url 'ventas:contacto_clientes_editar' pk=contactoCliente.pk %}'">Editar</button>
+                            <button class="btn btn-danger" onclick="window.location='{% url 'ventas:contacto_clientes_eliminar' pk=contactoCliente.pk %}'">Eliminar</button>
+                            </td>  
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <p>Nada que mostrar</p>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button class="btn btn-success" onclick="window.location='{% url 'ventas:contacto_clientes_reporte' %}'">Imprimir</button>
+
+{% endblock %}

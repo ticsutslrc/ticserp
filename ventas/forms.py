@@ -30,3 +30,15 @@ class VentaForm(ModelForm):
             'precio',
             'cantidad'
         ]
+
+
+class ContactoClienteForm(ModelForm):
+    class Meta:
+        model = models.ContactoCliente    
+        fields = [
+        'nombre',
+        'puesto',
+        'telefono',
+        'correo',
+        'cliente',
+        ]

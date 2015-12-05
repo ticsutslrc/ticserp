@@ -35,8 +35,22 @@ class Cliente(models.Model):
     estado = models.CharField(null=False, max_length=30)
     pais = models.CharField(null=False, max_length=30)
     giro = models.CharField(null=False, max_length=50) 
-    correo = models.CharField(null=False, max_length=50)
+    correo = models.CharField(null=False, max_length=60)
     telefono = models.CharField(null=False, max_length=20)
+
+    fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
+
+
+class ContactoCliente(models.Model):
+    nombre = models.CharField(null=False, max_length=100)
+    puesto = models.CharField(null=False, max_length=40)
+    telefono = models.CharField(null=False, max_length=20)
+    correo = models.CharField(null=False, max_length=60)
+    cliente = models.ForeignKey('ventas.Cliente', null=True)
 
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     fecha_modificacion = models.DateTimeField(auto_now=True, null=True, blank=True)
