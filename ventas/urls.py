@@ -21,7 +21,9 @@ urlpatterns = [
     
     url(r'^ventas/$', views.VentaConsultar, name='ventas_consultar'),
     url(r'^ventas/alta$', views.VentaAlta, name='ventas_alta'),
-    url(r'^ventas/reporte$', views.generar_pdf_ventas, name='ventas_reporte'),
     url(r'^ventas/eliminar/(?P<pk>\d+)/', views.VentaEliminar, name='ventas_eliminar'),
-
+    url(r'^ventas/buscar$', views.VentaBuscar, name='ventas_buscar'),
+    url(r'^ventas/reporte$', views.generar_pdf_ventas, name='ventas_reporte'),
+    url(r'^ventas/detalle/reporte/(?P<slug>[-\w]+)/$', views.generar_pdf_detalle_venta, name='detalle_venta_reporte'),
+    
 ]

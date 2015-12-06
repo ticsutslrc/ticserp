@@ -235,13 +235,13 @@ def generar_pdf_contacto_clientes(request):
 
 
 
-    ########################################### Reporte de Ventas ###########################################
+########################################### Reporte de Ventas ###########################################
 
 # Vista para generar reporte de ventas
 def generar_pdf_ventas(request):
     print ("Genero el PDF");
     response = HttpResponse(content_type='application/pdf')
-    pdf_name = "ventas.pdf"  # llamado clientes
+    pdf_name = "ventas.pdf"  # llamado ventas
     # la linea 26 es por si deseas descargar el pdf a tu computadora
     # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
     buff = BytesIO()
@@ -273,3 +273,66 @@ def generar_pdf_ventas(request):
     response.write(buff.getvalue())
     buff.close()
     return response
+
+
+
+ ########################################### Reporte de Detalle Venta ###########################################
+
+# Vista para generar reporte de detalleventas
+def generar_pdf_detalle_venta(request, slug):
+    print ("Genero el PDF");
+    response = HttpResponse(content_type='application/pdf')
+    pdf_name = "detalleventas.pdf"  # llamado detalleventas
+    # la linea 26 es por si deseas descargar el pdf a tu computadora
+    # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+    buff = BytesIO()
+    doc = SimpleDocTemplate(buff,
+                            pagesize=letter,
+                            rightMargin=40,
+                            leftMargin=40,
+                            topMargin=60,
+                            bottomMargin=18,
+                            )
+    detalleventas = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("Detalle Venta", styles['Heading1'])
+    detalleventas.append(header)
+    headings = ('Num. Factura','Cliente','Fecha','Producto','Cantidad','Precio','SubTotal')
+    alldetalleventas = [(p.num_factura, p.cliente, p.fecha.strftime("%d-%m-%Y"), p.producto.nombre, p.cantidad, p.precio, p.subtotal) for p in models.Venta.objects.filter(num_factura=slug).order_by('-fecha')]
+    print (alldetalleventas);
+
+    t = Table([headings] + alldetalleventas)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (12, -1), 1, colors.dodgerblue),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
+        ]
+    ))
+    detalleventas.append(t)
+
+
+    datoTotal = models.Venta.objects.filter(num_factura=slug).aggregate(total=Sum(F('precio') * F('cantidad')))['total']
+    totalVenta = Paragraph("TOTAL: " + str(datoTotal), styles['Heading3'])
+    detalleventas.append(totalVenta)
+
+
+    doc.build(detalleventas)
+    response.write(buff.getvalue())
+    buff.close()
+    return response
+
+
+
+########################################### Buscar DetallesVenta ###########################################
+
+# Vista para buscar detallesventa
+def VentaBuscar(request):
+    if request.method=='GET':
+        form = request.GET.get('num', None)
+        ventas = models.Venta.objects.filter(num_factura=form).order_by('-fecha')
+        total = models.Venta.objects.filter(num_factura=form).aggregate(total=Sum(F('precio') * F('cantidad')))['total']
+        return render(request, 'ventas/ventas/buscar.html', {'form': form,'ventas': ventas,'total': total})
+
+
+

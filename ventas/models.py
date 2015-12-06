@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Venta(models.Model):
-    num_factura = models.IntegerField()
+    num_factura = models.SlugField(max_length=10)
     fecha = models.DateTimeField(auto_now=True)
     cliente = models.ForeignKey('ventas.Cliente', null=True)
 
@@ -20,7 +20,7 @@ class Venta(models.Model):
     inventario = models.BooleanField(default=False)
 
     @property
-    def total(self):
+    def subtotal(self):
         return self.cantidad * self.precio
 
     def __str__(self):
