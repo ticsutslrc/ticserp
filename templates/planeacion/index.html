@@ -63,14 +63,16 @@
 
     </form>
     <div class="row">
+
         <div class="col-lg-12">
             <table class="table table-hover">
                 <thead>
-                <tr><h1>Ordenes de compra</h1></tr>
+                <tr><h1>Ordenes de compra</h1> </tr>
+                <button class="btn btn-success" onclick="window.location='Reporte'">Exportar</button>
                 <tr>
                     <th>Lote</th>
-					<th>id venta</th>
-                    <th>nombre_articulo</th>
+					<th>venta</th>
+                    <th>articulo</th>
                     <th>cantidad</th>
                     <th>status</th>
                     <th>fecha inicio</th>
@@ -108,7 +110,7 @@
     <div class="col-lg-12">
             <table class="table table-hover">
                 <thead>
-                <tr><h1>Ventas pendintes de orden de compra</h1></tr>
+                <tr><h1>Ventas pendientes de orden de produccion</h1></tr>
                 <tr>
                     <th>Factura</th>
 					<th>fecha</th>
@@ -125,7 +127,7 @@
 							<td>{{ ventas.fecha }} </td>
                             <td>{{ ventas.producto }} </td>
                             <td>{{ ventas.cantidad }} </td>
-                            <td><button class="btn btn-primary" onclick="window.location='{% url 'planeaccion:crear_orden_produccion' factura=ventas.num_factura producto=ventas.producto cantidad=ventas.cantidad %}'">Generar Orden de produccion</button> </td>
+                            <td><button class="btn btn-primary" onclick="window.location='{% url 'planeaccion:cambiar_status_venta' pk=ventas.num_factura %}'">Cambiar status</button> </td>
 
                         </tr>
                     {% endfor %}

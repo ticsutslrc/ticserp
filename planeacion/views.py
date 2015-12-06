@@ -4,8 +4,17 @@ from django.contrib import messages
 from . import forms
 from . import models
 from ventas.models import Venta
+from django.http import HttpResponse
+#import reportes
+from io import BytesIO
+from reportlab.platypus import SimpleDocTemplate, Paragraph, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Table
 
-#from ventas import models
+
+
 
 # Create your views here.
 def main(request):
@@ -50,21 +59,52 @@ def cambiar_status2(request, pk):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.INFO, 'Status modificado')
-            return HttpResponseRedirect(reverse('planeaccion:main'))
+            return HttpResponseRedirect(reverse('planeaccion:nueva_orden'))
         else:
             return render(request, 'planeacion/cambiar_status2.html', {'form': form})
     else:
         form = forms.nuevaOrdenForm(instance=query)
     return render(request, 'planeacion/cambiar_status2.html', {'form': form})
 
-def crear_orden_produccion(request, factura, producto, cantidad):
-
-    return render_to_response('ddd')
-
-
-
-
-
+def cambiar_status_venta(request, pk):
+    query = get_object_or_404(Venta, pk=pk)
+    query.planeacion=True
+    query.save()
+    messages.add_message(request, messages.INFO, 'Status de venta modificado')
+    return HttpResponseRedirect(reverse('planeaccion:nueva_orden'))
 
 
+def generar_pdf(request):
+    print ("Generando el PDF");
+    response = HttpResponse(content_type='application/pdf')
+    pdf_name = "ordenesdeproduccion.pdf"
 
+    buff = BytesIO()
+    doc = SimpleDocTemplate(buff,
+                            pagesize=letter,
+                            rightMargin=40,
+                            leftMargin=40,
+                            topMargin=60,
+                            bottomMargin=18,
+                            )
+    orden = []
+    styles = getSampleStyleSheet()
+    header = Paragraph("Reporde de ordenes de produccion", styles['Heading1'])
+    orden.append(header)
+    headings = ('Lote','Venta','Articulo','Cantidad','Estatus','Fecha Inicio','Fecha creacion','Fecha de entrega')
+    ordenes = [(p.id_lote,p.id_venta,p.nombre_articulo,p.cantidad,p.status,p.fecha_inicio,p.fecha_creacion) for p in models.planeacion.objects.all()]
+    print (ordenes)
+
+    t = Table([headings] + ordenes)
+    t.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (12, -1), 1, colors.dodgerblue),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.blue),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
+        ]
+    ))
+    orden.append(t)
+    doc.build(orden)
+    response.write(buff.getvalue())
+    buff.close()
+    return response
