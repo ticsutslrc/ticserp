@@ -65,6 +65,14 @@ def productos_view(request, pk):
         'materiales': materiales,
     })
 
+@login_required()
+def productos_chart(request, pk):
+    producto = get_object_or_404(models.Producto, pk=pk)
+    movimiento_inventario = producto.movimientoinventarioproduto_set.all()
+
+    data = serializers.serialize("json", movimiento_inventario)
+    return HttpResponse(data, content_type='application/json')
+
 
 @login_required()
 def productos_delete(request, pk):
@@ -236,3 +244,11 @@ def materiales_generar_qr(request, pk):
     response = HttpResponse(content_type="image/png")
     qr.save(response, "PNG")
     return response
+
+@login_required()
+def materiales_chart(request, pk):
+    material = get_object_or_404(models.Material, pk=pk)
+    movimiento_inventario = material.movimientoinventariomaterial_set.all()
+
+    data = serializers.serialize("json", movimiento_inventario)
+    return HttpResponse(data, content_type='application/json')

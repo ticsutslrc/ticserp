@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'css/morris.css' %}">
     <link rel="stylesheet" href="{% static 'css/inventario.css' %}">
 {% endblock %}
 
@@ -29,7 +30,9 @@
                                     Eliminar
                                 </button>
                                 <br><br>
-                                <a class="btn btn-info btn-sm" href="{% url 'inventario:productos_registrar_movimiento' pk=producto.pk %}">Registrar movimiento</a>
+                                <a class="btn btn-info btn-sm"
+                                   href="{% url 'inventario:productos_registrar_movimiento' pk=producto.pk %}">Registrar
+                                    movimiento</a>
                             </div>
                         </div>
                     </div>
@@ -40,10 +43,15 @@
             <div class="col-lg-10">
                 <div class="well">
                     <p>
-                        <b>Numero Inventario:</b> {{ producto.numero_inventario }} &nbsp;&nbsp;&nbsp; <b>Codigo barras:</b> {{ producto.codigo_barras }} &nbsp;&nbsp;&nbsp;
-                        <b>Peso:</b> {{ producto.peso | intcomma }} <b>GR.</b> &nbsp;&nbsp;&nbsp; <b>Ultimo costo:</b> {{ producto.ultimo_costo | intcomma }} &nbsp;&nbsp;&nbsp; <b>Costo promedio:</b> {{ producto.costo_promedio | intcomma }}<br>
-                        <b>Cantidad total almacen:</b> {{ producto.cantidad_total_almacen | intcomma }} &nbsp;&nbsp;&nbsp; <b>Cantidad minimo almacen:</b> {{ producto.cantidad_minimo_almacen | intcomma }}<br>
-                        <b>Fecha creaci&oacute;n:</b> {{ producto.fecha_creacion }} &nbsp;&nbsp;&nbsp; <b>Fecha modificaci&oacute;n:</b> {{ producto.fecha_modificacion }}
+                        <b>Numero Inventario:</b> {{ producto.numero_inventario }} &nbsp;&nbsp;&nbsp; <b>Codigo
+                        barras:</b> {{ producto.codigo_barras }} &nbsp;&nbsp;&nbsp;
+                        <b>Peso:</b> {{ producto.peso | intcomma }} <b>GR.</b> &nbsp;&nbsp;&nbsp; <b>Ultimo
+                        costo:</b> {{ producto.ultimo_costo | intcomma }} &nbsp;&nbsp;&nbsp; <b>Costo
+                        promedio:</b> {{ producto.costo_promedio | intcomma }}<br>
+                        <b>Cantidad total almacen:</b> {{ producto.cantidad_total_almacen | intcomma }} &nbsp;&nbsp;&nbsp;
+                        <b>Cantidad minimo almacen:</b> {{ producto.cantidad_minimo_almacen | intcomma }}<br>
+                        <b>Fecha creaci&oacute;n:</b> {{ producto.fecha_creacion }} &nbsp;&nbsp;&nbsp; <b>Fecha
+                        modificaci&oacute;n:</b> {{ producto.fecha_modificacion }}
                     </p>
                 </div>
             </div>
@@ -90,7 +98,8 @@
 
                         <div class="btn-group pull-right">
                             <a class="btn btn-danger btn-sm"
-                               href="{% url 'inventario:productos_asignar_material' pk=producto.pk %}">Asignar Materiales</a>
+                               href="{% url 'inventario:productos_asignar_material' pk=producto.pk %}">Asignar
+                                Materiales</a>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -105,13 +114,21 @@
                             <tbody>
                             {% for material in materiales %}
                                 <tr>
-                                    <td><a href="{% url 'inventario:materiales_view' pk=material.material.pk %}">{{ material.material.nombre }}</a></td>
+                                    <td>
+                                        <a href="{% url 'inventario:materiales_view' pk=material.material.pk %}">{{ material.material.nombre }}</a>
+                                    </td>
                                     <td>{{ material.cantidad | intcomma }}</td>
                                     <td>{{ material.comenatios }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div id="myfirstchart" style="height: 250px;">
+                    <div class="container">
+                         <h3>Animated button</h3>
+                        <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Cargando...</button>
                     </div>
                 </div>
             </div>
@@ -134,4 +151,13 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+    document.producto = {{ producto.pk }};
+    </script>
+    <script type="text/javascript" src="{% static 'js/raphael-min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/morris.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/inventario/producto_chart.js' %}"></script>
 {% endblock %}
