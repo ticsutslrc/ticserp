@@ -10,26 +10,34 @@
         <div class="row">
             <div class="col-lg-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Materiales <a class="btn btn-sm btn-danger pull-right"
-                            href="{% url 'inventario:materiales_add' %}">Agregar</a></div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Numero de inventario</th>
-                            <th>Código de barras</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for material in materiales %}
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Productos</h3>
+
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-danger btn-sm"
+                               href="{% url 'inventario:materiales_add' %}">Agregar</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <td>{{ material.nombre }}</td>
-                                <td>{{ material.numero_inventario }}</td>
-                                <td>{{ material.codigo_barras }}</td>
+                                <th>Nombre</th>
+                                <th>Numero de inventario</th>
+                                <th>Código de barras</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for material in materiales %}
+                                <tr>
+                                    <td><a href="{% url 'inventario:materiales_view' pk=material.pk %}">{{ material.nombre }}</a></td>
+                                    <td>{{ material.numero_inventario }}</td>
+                                    <td>{{ material.codigo_barras }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

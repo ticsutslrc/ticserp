@@ -3,8 +3,8 @@ from django.forms import ModelForm
 
 from . import models
 
-class ProductoForm(ModelForm):
 
+class ProductoForm(ModelForm):
     class Meta:
         model = models.Producto
         fields = [
@@ -36,3 +36,32 @@ class MaterialForm(ModelForm):
             'comentarios',
         ]
 
+
+class DetalleProductoMaterial(ModelForm):
+    class Meta:
+        model = models.DetalleProductosMaterial
+        fields = [
+            'material',
+            'cantidad',
+            'comentarios',
+        ]
+
+
+class MovimeintoInventarioProducto(ModelForm):
+    class Meta:
+        model = models.MovimientoInventarioProduto
+        fields = [
+            'tipo',
+            'cantidad',
+            'comentarios',
+        ]
+
+
+class MovimientoInventarioMaterial(ModelForm):
+    class Meta:
+        model = models.MovimientoInventarioMaterial
+        fields = [
+            'tipo',
+            'cantidad',
+            'comentarios',
+        ]

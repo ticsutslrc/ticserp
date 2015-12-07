@@ -11,7 +11,18 @@
         <div class="row">
             <div class="col-lg-5">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3>Agregar Material</h3></div>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">{% if not material %}
+                            Agregar Material
+                        {% else %}
+                            Modificar Material
+                        {% endif %}</h3>
+
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-danger btn-sm" target="_self"
+                               href="{% url 'compras:proveedor_alta' %}">Agregar Proveedor</a>
+                        </div>
+                    </div>
                     <div class="panel-body">
                         <form action="" method="post" class="form">
                             {% csrf_token %}
