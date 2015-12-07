@@ -1,9 +1,134 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Principal
+    Principal
 {% endblock %}
 
 {% block body %}
-    <h1>Hola mundo yo soy produccion</h1>
+    <h1>Producci&oacute;n</h1>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+                {# ordenes de produccion  #}
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    {#                    <label for="orden">No. Orden</label>#}
+                    {#                    <input id="orden" type="text" value="654657" disabled/>#}
+                    {##}
+                    {#                    <label for="fecha">Fecha</label>#}
+                    {#                    <input id="fecha" type="text" value="12/10/2015" disabled/>#}
+                    <h2> Ordenes de Produccion</h2>
+
+                    <div class="col-lg-1"></div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Status</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Entrega</th>
+                            <th>Fecha Creacion</th>
+                            <th></th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if ordenes %}
+                            {% for orden in ordenes %}
+                                <tr>
+                                    <td>{{ orden.id_lote }}</td>
+                                    <td>{{ orden.nombre_articulo.nombre }}</td>
+                                    <td>{{ orden.cantidad }}</td>
+                                    <td>{{ orden.get_status_display }}</td>
+                                    <td>{{ orden.fecha_inicio }}</td>
+                                    <td>{{ orden.fecha_entrega }}</td>
+                                    <td>{{ orden.fecha_creacion }}</td>
+                                    <td>
+                                        <button class="btn btn-primary"
+                                                onclick="window.location='{% url 'produccion:detalle_orden' pk=orden.id_lote %}'">
+                                            Ver Detalle
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    {##}
+                    {#                    <table class="table table-bordered">#}
+                    {#                        <thead>#}
+                    {#                        <tr>#}
+                    {#                            <th>Etapa</th>#}
+                    {#                            <th>Proceso</th>#}
+                    {#                            <th>Codigo</th>#}
+                    {#                            <th>Descripcion</th>#}
+                    {#                            <th>No. Serie</th>#}
+                    {#                        </tr>#}
+                    {#                        </thead>#}
+                    {#                        <tbody>#}
+                    {#                        <tr>#}
+                    {#                            <td>Ensamble</td>#}
+                    {#                            <td>Ensamble Tarjeta</td>#}
+                    {#                            <td>Ens56</td>#}
+                    {#                            <td>Ensable de tarjeta madre a case</td>#}
+                    {#                            <td>AB</td>#}
+                    {#                        </tr>#}
+                    {#                        <tr>#}
+                    {#                            <td>Plastico</td>#}
+                    {#                            <td>Moldeo</td>#}
+                    {#                            <td>mold01</td>#}
+                    {#                            <td>Moldeo de plastico de case</td>#}
+                    {#                            <td>AF</td>#}
+                    {#                        </tr>#}
+                    {##}
+                    {#                        </tbody>#}
+                    {#                    </table>#}
+                </div>
+
+                {#   status de producion         #}
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+
+                    {#                    <table class="table table-bordered">#}
+                    {#                        <thead>#}
+                    {#                        <tr>#}
+                    {#                            <th>Firstname</th>#}
+                    {#                            <th>Lastname</th>#}
+                    {#                            <th>Email</th>#}
+                    {#                        </tr>#}
+                    {#                        </thead>#}
+                    {#                        <tbody>#}
+                    {#                        <tr>#}
+                    {#                            <td>John</td>#}
+                    {#                            <td>Doe</td>#}
+                    {#                            <td>john@example.com</td>#}
+                    {#                        </tr>#}
+                    {#                        <tr>#}
+                    {#                            <td>Mary</td>#}
+                    {#                            <td>Moe</td>#}
+                    {#                            <td>mary@example.com</td>#}
+                    {#                        </tr>#}
+                    {#                        <tr>#}
+                    {#                            <td>July</td>#}
+                    {#                            <td>Dooley</td>#}
+                    {#                            <td>july@example.com</td>#}
+                    {#                        </tr>#}
+                    {#                        </tbody>#}
+                    {#                    </table>#}
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
 {% endblock %}
