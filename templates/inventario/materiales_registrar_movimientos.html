@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load bootstrap3 %}
+{% load humanize %}
 
 {% block title %}
-    Producto Agregar
+    Registrar movimiento
 {% endblock %}
 
 {% block head %}
@@ -15,7 +16,9 @@
         <div class="row">
             <div class="col-lg-5">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3>{% if not producto %}Agregar producto{% else %}Modificar {{ producto.nombre }}{% endif %} </h3></div>
+                    <div class="panel-heading"><h3>Registrar movimiento a {{ material.nombre }}</h3>
+                    <p>Stock Actual: {{ material.cantidad_total_almacen | intcomma }}</p>
+                    </div>
                     <div class="panel-body">
                         <form action="" method="post" class="form">
                             {% csrf_token %}
@@ -26,7 +29,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="text-center"><img src="{% static 'img/producto_add.png' %}"></div>
+                <div class="text-center"><img src="{% static 'img/producto_movimiento.png' %}"></div>
             </div>
         </div>
     </div>

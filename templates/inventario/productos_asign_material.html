@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 
 {% block title %}
-    Producto Agregar
+    Asignar material
 {% endblock %}
 
 {% block head %}
@@ -15,7 +15,15 @@
         <div class="row">
             <div class="col-lg-5">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3>{% if not producto %}Agregar producto{% else %}Modificar {{ producto.nombre }}{% endif %} </h3></div>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Asignar material
+                            a {{ producto.nombre }}</h3>
+
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-danger btn-sm"
+                               href="{% url 'inventario:materiales_add' %}">Agregar Material</a>
+                        </div>
+                    </div>
                     <div class="panel-body">
                         <form action="" method="post" class="form">
                             {% csrf_token %}
@@ -26,7 +34,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="text-center"><img src="{% static 'img/producto_add.png' %}"></div>
+                <div class="text-center"><img src="{% static 'img/producto_material.png' %}"></div>
             </div>
         </div>
     </div>

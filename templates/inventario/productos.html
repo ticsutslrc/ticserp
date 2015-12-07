@@ -10,26 +10,34 @@
         <div class="row">
             <div class="col-lg-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Productos <a class="btn btn-sm btn-danger pull-right"
-                            href="{% url 'inventario:productos_add' %}">Agregar</a></div>
-                    <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Numero de inventario</th>
-                        <th>Código de barras</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for producto in productos %}
-                        <tr>
-                            <td>{{ producto.nombre }}</td>
-                            <td>{{ producto.numero_inventario }}</td>
-                            <td>{{ producto.codigo_barras }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Productos</h3>
+
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-danger btn-sm"
+                               href="{% url 'inventario:productos_add' %}">Agregar</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Numero de inventario</th>
+                                <th>Código de barras</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for producto in productos %}
+                                <tr>
+                                    <td><a href="{% url 'inventario:productos_view' pk=producto.pk %}">{{ producto.nombre }}</a></td>
+                                    <td>{{ producto.numero_inventario }}</td>
+                                    <td>{{ producto.codigo_barras }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

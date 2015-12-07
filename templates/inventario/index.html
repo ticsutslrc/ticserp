@@ -6,7 +6,14 @@ Inventarios
 {% endblock %}
 
 {% block body %}
-    <div>
-    <img src="{% static 'img/ontime_erp_inventario.svg' %}">
+    <div class="text-center">
+        <img src="{% static 'img/ontime_erp_inventario.svg' %}">
+        <br><br><br>
+        <div class="btn-group">
+            <a class="btn btn-success" href="{% url 'inventario:productos' %}">Consultar Producto</a>
+            <a class="btn btn-success" href="{% url 'inventario:productos_add' %}">Agregar Producto</a>
+            <a class="btn btn-success" href="{% url 'inventario:materiales' %}">Consultar Material</a>
+            <a class="btn btn-success" href="{% url 'inventario:materiales_add' %}">Agregar Material</a>
+        </div>
     </div>
 {% endblock %}

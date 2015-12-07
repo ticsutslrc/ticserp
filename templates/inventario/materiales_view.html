@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% load humanize %}
+
+{% block title %}
+    Material {{ producto.nombre }}
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6"><h3>Material: {{ material.nombre }}</h3>
+
+                                <p>{{ material.descripccion }}</p>
+                                <p><b>Proveedor: </b><a href="{% url 'compras:proveedor_modificar' pk=material.proveedor.pk %}">{{ material.proveedor.nombre }}</a></p>
+                            </div>
+                            <div class="col-sm-1 text-center"><img src="{% static 'img/producto.png' %}"></div>
+                            <div class="col-sm-5 text-center">
+                                <a class="btn btn-default btn-sm"
+                                   href="{% url 'inventario:materiales_edit' pk=material.pk %}">Modificar</a><br><br>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                                    Eliminar
+                                </button>
+                                <br><br>
+                                <a class="btn btn-info btn-sm" href="{% url 'inventario:materiales_registrar_movimiento' pk=material.pk %}">Registrar movimiento</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="well">
+                    <p>
+                        <b>Numero Inventario:</b> {{ material.numero_inventario }} &nbsp;&nbsp;&nbsp; <b>Codigo barras:</b> {{ material.codigo_barras }} &nbsp;&nbsp;&nbsp;
+                        <b>Peso:</b> {{ material.peso | intcomma }} <b>GR.</b> &nbsp;&nbsp;&nbsp; <b>Ultimo costo:</b> {{ material.ultimo_costo | intcomma }} &nbsp;&nbsp;&nbsp; <b>Costo promedio:</b> {{ material.costo_promedio | intcomma }}<br>
+                        <b>Cantidad total almacen:</b> {{ material.cantidad_total_almacen | intcomma }} &nbsp;&nbsp;&nbsp; <b>Cantidad minimo almacen:</b> {{ material.cantidad_minimo_almacen | intcomma }}<br>
+                        <b>Fecha creaci&oacute;n:</b> {{ material.fecha_creacion }} &nbsp;&nbsp;&nbsp; <b>Fecha modificaci&oacute;n:</b> {{ material.fecha_modificacion }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h4>Movimientos de inventario</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Cantidad</th>
+                                <th>Stock Antes</th>
+                                <th>Stock Despues</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for movimiento in movimiento_inventario %}
+                                <tr>
+                                    <td>{{ movimiento.fecha_modificacion }}</td>
+                                    <td>{{ movimiento.get_tipo_display }}</td>
+                                    <td>{{ movimiento.cantidad | intcomma }}</td>
+                                    <td>{{ movimiento.cantidad_total_almacen_antes | intcomma }}</td>
+                                    <td>{{ movimiento.cantidad_total_almacen_despues | intcomma }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Productos</h3>
+
+                        <div class="btn-group pull-right">
+
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Cantidad</th>
+                                <th>Comentarios</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for producto in productos %}
+                                <tr>
+                                    <td><a href="{% url 'inventario:productos_view' pk=producto.producto.pk %}">{{ producto.producto.nombre }}</a></td>
+                                    <td>{{ producto.cantidad | intcomma }}</td>
+                                    <td>{{ producto.comenatios }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar material: {{ material.nombre }}</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <a href="{% url 'inventario:materiales_delete' pk=material.pk %}" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
