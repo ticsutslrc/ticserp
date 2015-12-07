@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3>{% if not producto %}Agregar producto{% else %}Modificar {{ producto.nombre }}{% endif %} </h3></div>
                     <div class="panel-body">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="text-center"><img src="{% static 'img/producto_add.png' %}"></div>
             </div>
         </div>

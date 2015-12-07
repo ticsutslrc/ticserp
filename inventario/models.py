@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+import qrcode
 
 # Representa los tipos posibles de movimientos de inventario
 TIPO_MOVIMIENTO_ENTRADA = 1
@@ -241,6 +242,16 @@ class Producto(models.Model):
         # regresar el movimiento
         return movimiento
 
+    def generar_qr(self, size=5, border=0):
+        if not self.codigo_barras:
+            return None
+
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L,
+                           box_size=size, border=border)
+        qr.add_data(self.codigo_barras)
+        qr.make(fit=True)
+        return qr.make_image()
+
 
 class Material(models.Model):
     """
@@ -469,6 +480,16 @@ class Material(models.Model):
         self.save()
         # regresar el movimiento
         return movimiento
+
+    def generar_qr(self, size=5, border=0):
+        if not self.codigo_barras:
+            return None
+
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L,
+                           box_size=size, border=border)
+        qr.add_data(self.codigo_barras)
+        qr.make(fit=True)
+        return qr.make_image()
 
 
 class DetalleProductosMaterial(models.Model):
