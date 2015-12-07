@@ -13,7 +13,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Table
 from inventario.models import Producto
-
+from inventario.models import DetalleProductosMaterial
 
 
 # Create your views here.
@@ -75,11 +75,10 @@ def cambiar_status_venta(request, pk):
     return HttpResponseRedirect(reverse('planeaccion:nueva_orden'))
 
 def explocion(request,producto,cantidad):
-    #producto1 = Producto.objects.get(pk=producto)
-    #materiales = Producto.detalleproductosmaterial_set.all()
-    #cant = cantidad
-    #return render(request, 'planeacion/explocion.html', {'producto': producto1, 'cant': cant, 'materiales': materiales})
-    return render(request, 'planeacion/explocion.html')
+    producto1 = Producto.objects.get(pk=producto)
+    materiales=producto1.detalleproductosmaterial_set.all()
+    cant = cantidad
+    return render(request, 'planeacion/explocion.html', {'producto': producto1, 'cant': cant, 'materiales': materiales})
 
 
 

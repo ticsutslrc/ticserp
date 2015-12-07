@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load bootstrap3 %}
+{% load staticfiles %}
 <head>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
 
+<table class="table table-hover">
+                <thead>
+                <tr><h1>Explocion de material</h1></tr>
+                <tr>Clave: {{ producto.pk }} | Nombre: {{ producto.nombre }}</tr>
+                    <th>Material</th>
+					<th>Cantidad requerida</th>
+                    <th>Unidades</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if materiales %}
+                    {% for materiales in materiales %}
+                        <tr>
+                            <td>{{ materiales.material.nombre}} </td>
+                            <td id="cantidad">{{ materiales.cantidad}} </td>
+                            <td id="unidades">{{ cant}} </td>
+                            <td id="total">1</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <p>Ningun registro</p>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+<script>
+    var i = document.getElementById("cantidad");
+    var j = document.getElementById("unidades");
+    document.getElementById("total").textContent= i.textContent* j.textContent;
 
+</script>
 </body>
-</html>
