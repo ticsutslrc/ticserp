@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^cambiar_status2/(?P<pk>[0-9]+)$', views.cambiar_status2, name='cambiar_status2'),
     url(r'^cambiar_status_venta/(?P<pk>[0-9]+)$', views.cambiar_status_venta, name='cambiar_status_venta'),
     url(r'^Reporte$', views.generar_pdf, name='generar_pdf'),
+    url(r'^explocion/(?P<producto>[0-9]+)/(?P<cantidad>[0-9]+)$', views.explocion, name='explocion'),
 
 ]

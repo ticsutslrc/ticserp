@@ -86,7 +86,7 @@
                         <tr>
                             <td>{{ planeacion.id_lote }} </td>
 							<td>{{ planeacion.id_venta }} </td>
-                            <td>{{ planeacion.nombre_articulo }} </td>
+                            <td>{{ planeacion.nombre_articulo.nombre }} </td>
                             <td>{{ planeacion.cantidad }} </td>
                             <td>{{ planeacion.status }} </td>
                             <td>{{ planeacion.fecha_inicio }} </td>
@@ -125,9 +125,9 @@
                         <tr>
                             <td>{{ ventas.num_factura }} </td>
 							<td>{{ ventas.fecha }} </td>
-                            <td>{{ ventas.producto }} </td>
+                            <td>{{ ventas.producto.nombre }} </td>
                             <td>{{ ventas.cantidad }} </td>
-                            <td><button class="btn btn-primary" onclick="window.location='{% url 'planeaccion:cambiar_status_venta' pk=ventas.num_factura %}'">Cambiar status</button> </td>
+                            <td><button class="btn btn-primary" onclick="window.location='{% url 'planeaccion:cambiar_status_venta' pk=ventas.pk %}'">Cambiar status</button> </td>
 
                         </tr>
                     {% endfor %}

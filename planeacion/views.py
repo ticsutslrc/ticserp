@@ -12,7 +12,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Table
-
+from inventario.models import Producto
 
 
 
@@ -25,6 +25,7 @@ def main(request):
 
 def nuevaOrden(request):
     planeacion = models.planeacion.objects.all()
+    ventas=Venta.objects.filter(planeacion=False)
     if request.method == 'POST':
         form = forms.nuevaOrdenForm(request.POST or None)
         if form.is_valid():
@@ -35,7 +36,7 @@ def nuevaOrden(request):
             return render(request, 'planeacion/index.html', {'form': form})
     else:
         form = forms.nuevaOrdenForm()
-    return render(request, 'planeacion/index.html', {'form': form, 'planeacion': planeacion})
+    return render(request, 'planeacion/index.html', {'form': form, 'planeacion': planeacion, 'ventas': ventas})
 
 
 def consultar(request):
@@ -73,9 +74,18 @@ def cambiar_status_venta(request, pk):
     messages.add_message(request, messages.INFO, 'Status de venta modificado')
     return HttpResponseRedirect(reverse('planeaccion:nueva_orden'))
 
+def explocion(request,producto,cantidad):
+    #producto1 = Producto.objects.get(pk=producto)
+    #materiales = Producto.detalleproductosmaterial_set.all()
+    #cant = cantidad
+    #return render(request, 'planeacion/explocion.html', {'producto': producto1, 'cant': cant, 'materiales': materiales})
+    return render(request, 'planeacion/explocion.html')
+
+
+
 
 def generar_pdf(request):
-    print ("Generando el PDF");
+    print ("Generando el PDF")
     response = HttpResponse(content_type='application/pdf')
     pdf_name = "ordenesdeproduccion.pdf"
 

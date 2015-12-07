@@ -8,12 +8,14 @@
 <body>
                             <p>Lote:            {{ consulta.id_lote }}</p>
 							<p>Venta:           {{ consulta.id_venta }}</p>
-                            <p>Articulo:        {{ consulta.nombre_articulo }} </p>
+                            <p>Articulo:        {{ consulta.nombre_articulo.nombre }} </p>
                             <p>Cantidad:        {{ consulta.cantidad }} </p>
                             <p>Status:          {{ consulta.status }} </p>
                             <p>Fecha inicio:    {{ consulta.fecha_inicio }} </p>
                             <p>Fecha creacion:  {{ consulta.fecha_creacion }} </p>
                             <p>Fecha entrega:   {{ consulta.fecha_entrega }} </p>
+
+<a href="{% url 'planeaccion:explocion' producto=consulta.nombre_articulo.pk cantidad=consulta.cantidad %}" class="btn btn-success btn-small pull-right">Materiales</a>
 
 
 </body>

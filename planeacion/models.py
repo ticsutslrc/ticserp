@@ -5,7 +5,8 @@ from django.db import models
 class planeacion(models.Model):
     id_lote = models.AutoField(primary_key=True)#id 
     id_venta = models.CharField(max_length=100)#id venta
-    nombre_articulo = models.CharField(max_length=100)#relacion con articulo
+    #nombre_articulo = models.CharField(max_length=100)#relacion con articulo
+    nombre_articulo = models.ForeignKey('inventario.Producto', null=False)
     cantidad = models.IntegerField()
     status = models.CharField(max_length=15, choices=(
         ('1', 'Cancelado'),

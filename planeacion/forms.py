@@ -9,7 +9,7 @@ class nuevaOrdenForm(ModelForm):
         model = models.planeacion
         fields = [
             'id_lote',
-			'id_venta',
+            'id_venta',
             'nombre_articulo',
             'cantidad',
             'status',
@@ -25,4 +25,7 @@ class status(ModelForm):
         fields = [
             'status',
         ]
+
+
+
 
