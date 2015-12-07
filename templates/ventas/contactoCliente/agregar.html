@@ -8,13 +8,19 @@
 
 {% block body %}
     {# Display a form #}
-    <form action="" method="post" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">
-                {% bootstrap_icon "star" %} Guardar
-            </button>
-        {% endbuttons %}
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <form action="" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        {% bootstrap_icon "star" %} Guardar
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

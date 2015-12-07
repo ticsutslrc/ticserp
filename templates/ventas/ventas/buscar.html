@@ -8,6 +8,7 @@
 
 {% block body %}
     {# Display a form #}
+<div class="container">
     <div class="row">
         <div class="col-lg-6">
             <h2>Buscar Venta</h2>
@@ -17,11 +18,13 @@
 
 
     <div class="row">
-    <form method="GET" class="form">
-        <input id="num" type="text" name="num" class="form-control" placeholder="Ingrese Numero de Factura"><br>
-        <input type="submit" value="Buscar" class="btn btn-success">
-    </form>
-    <br><br>
+        <div class="col-lg-8">
+            <form method="GET" class="form">
+                <input id="num" type="text" name="num" class="form-control" placeholder="Ingrese Numero de Factura"><br>
+                <input type="submit" value="Buscar" class="btn btn-success">
+            </form>
+            <br><br>
+        </div>
     </div>
 
     
@@ -67,4 +70,5 @@
         <br><br>
         <button class="btn btn-success" onclick="window.location='{% url 'ventas:detalle_venta_reporte' form %}'">Imprimir</button>
     </div> 
+</div> 
 {% endblock %}

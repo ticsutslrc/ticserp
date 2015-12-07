@@ -7,11 +7,12 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
     <div class="row">
         <div class="col-lg-6">
             <h2>Consultar Ventas</h2>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <a href="{% url 'ventas:ventas_alta' %}" class="btn btn-success btn-small pull-right">Agregar Venta</a>
         </div>
     </div>
@@ -61,5 +62,5 @@
         <br><br>
         <button class="btn btn-success" onclick="window.location='{% url 'ventas:ventas_reporte' %}'">Imprimir</button>
     </div> 
-
+</div>
 {% endblock %}

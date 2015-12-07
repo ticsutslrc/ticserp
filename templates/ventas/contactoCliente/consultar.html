@@ -7,11 +7,12 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
     <div class="row">
         <div class="col-lg-6">
             <h2>Consultar Contactos</h2>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <a href="{% url 'ventas:contacto_clientes_alta' %}" class="btn btn-success btn-small pull-right">Agregar Contacto</a>
         </div>
     </div>
@@ -54,5 +55,5 @@
     </div>
 
     <button class="btn btn-success" onclick="window.location='{% url 'ventas:contacto_clientes_reporte' %}'">Imprimir</button>
-
+</div>
 {% endblock %}
