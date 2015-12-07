@@ -12,6 +12,7 @@ class planeacion(models.Model):
         ('1', 'Cancelado'),
         ('2', 'Iniciado'),
         ('3', 'Sin iniciar'),
+        ('4', 'Terminada'),
     ), default='3')
     fecha_inicio = models.DateTimeField()
     fecha_creacion = models.DateTimeField()#auto

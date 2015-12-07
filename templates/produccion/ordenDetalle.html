@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+       <div class="container-fluid">
     <div class="row">
         <h1> Orden de Producci&oacute;n </h1>
         <a class="btn btn-default pull-right" href="/produccion"><span class="glyphicon glyphicon-arrow-left"></span>
@@ -39,10 +40,21 @@
                     <td>{{ orden.fecha_entrega }}</td>
                     <td>{{ orden.fecha_creacion }}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">Cancelar</button>
+                        {% if orden.get_status_display == 'Iniciado' %}
+                            <button type="button" class="btn btn-danger" onclick="window.location='{% url 'produccion:cambiar_status' pk=orden.id_lote status=1 %}'">Cancelar</button>
+                        {% endif %}
+
+                        {% if orden.get_status_display == 'Cancelado' %}
+                            <button type="button" class="btn btn-primary" onclick="window.location='{% url 'produccion:cambiar_status' pk=orden.id_lote status=2 %}'">Iniciar</button>
+                        {% endif %}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary">Iniciar</button>
+                        {% if orden.get_status_display == 'Sin iniciar' %}
+                            <button type="button" class="btn btn-primary" onclick="window.location='{% url 'produccion:cambiar_status' pk=orden.id_lote status=2 %}'">Iniciar</button>
+                        {% endif %}
+                        {% if orden.get_status_display == 'Iniciado' %}
+                            <button type="button" class="btn btn-success" onclick="window.location='{% url 'produccion:cambiar_status' pk=orden.id_lote status=4 %}'">Terminar</button>
+                        {% endif %}
                     </td>
                 </tr>
 
@@ -88,6 +100,7 @@
                 </table>
             </div>
         </div>
+    </div>
     </div>
 
 {% endblock %}

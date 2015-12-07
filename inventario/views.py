@@ -3,12 +3,13 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, Ht
 from django.core.urlresolvers import reverse
 from django.core import serializers
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from . import forms
 from . import models
 
 
-# Create your views here.
+@login_required()
 def main(request):
     """
     Vista principal de modulo de inventarios
@@ -16,11 +17,13 @@ def main(request):
     return render(request, 'inventario/index.html')
 
 
+@login_required()
 def productos(request):
     query = models.Producto.objects.all()
     return render(request, 'inventario/productos.html', {'productos': query, })
 
 
+@login_required()
 def productos_add(request):
     if request.method == 'POST':
         form = forms.ProductoForm(request.POST)
@@ -35,6 +38,7 @@ def productos_add(request):
     return render(request, 'inventario/productos_add.html', {'form': form, })
 
 
+@login_required()
 def productos_edit(request, pk):
     producto = get_object_or_404(models.Producto, pk=pk)
     if request.method == 'POST':
@@ -50,6 +54,7 @@ def productos_edit(request, pk):
     return render(request, 'inventario/productos_add.html', {'form': form, 'producto': producto, })
 
 
+@login_required()
 def productos_view(request, pk):
     producto = get_object_or_404(models.Producto, pk=pk)
     movimiento_inventario = producto.movimientoinventarioproduto_set.all()
@@ -61,6 +66,7 @@ def productos_view(request, pk):
     })
 
 
+@login_required()
 def productos_delete(request, pk):
     producto = get_object_or_404(models.Producto, pk=pk)
     producto.delete()
@@ -68,6 +74,7 @@ def productos_delete(request, pk):
     return HttpResponseRedirect(reverse('inventario:productos'))
 
 
+@login_required()
 def productos_asign_material(request, pk):
     producto = get_object_or_404(models.Producto, pk=pk)
     detalle_producto_material = models.DetalleProductosMaterial()
@@ -85,6 +92,7 @@ def productos_asign_material(request, pk):
     return render(request, 'inventario/productos_asign_material.html', {'form': form, 'producto': producto, })
 
 
+@login_required()
 def productos_registrar_movimiento(request, pk):
     producto = get_object_or_404(models.Producto, pk=pk)
     movimiento = models.MovimientoInventarioProduto()
@@ -116,17 +124,29 @@ def productos_registrar_movimiento(request, pk):
     return render(request, 'inventario/productos_registrar_movimientos.html', {'form': form, 'producto': producto, })
 
 
+@login_required()
+def productos_generar_qr(request, pk):
+    producto = get_object_or_404(models.Producto, pk=pk)
+    qr = producto.generar_qr()
+    response = HttpResponse(content_type="image/png")
+    qr.save(response, "PNG")
+    return response
+
+
+@login_required()
 def materiales_json(request):
     query = models.Material.objects.all()
     json_data = serializers.serialize('json', query)
     return HttpResponse(json_data, content_type="application/json")
 
 
+@login_required()
 def materiales(request):
     query = models.Material.objects.all()
     return render(request, 'inventario/materiales.html', {'materiales': query, })
 
 
+@login_required()
 def materiales_add(request):
     if request.method == 'POST':
         form = forms.MaterialForm(request.POST)
@@ -141,6 +161,7 @@ def materiales_add(request):
     return render(request, 'inventario/materiales_add.html', {'form': form, })
 
 
+@login_required()
 def materiales_edit(request, pk):
     material = get_object_or_404(models.Material, pk=pk)
     if request.method == 'POST':
@@ -156,6 +177,7 @@ def materiales_edit(request, pk):
     return render(request, 'inventario/materiales_add.html', {'form': form, 'material': material, })
 
 
+@login_required()
 def materiales_view(request, pk):
     material = get_object_or_404(models.Material, pk=pk)
     movimiento_inventario = material.movimientoinventariomaterial_set.all()
@@ -167,6 +189,7 @@ def materiales_view(request, pk):
     })
 
 
+@login_required()
 def materiales_delete(request, pk):
     material = get_object_or_404(models.Material, pk=pk)
     material.delete()
@@ -174,6 +197,7 @@ def materiales_delete(request, pk):
     return HttpResponseRedirect(reverse('inventario:materiales'))
 
 
+@login_required()
 def materiales_registrar_movimiento(request, pk):
     material = get_object_or_404(models.Material, pk=pk)
     movimiento = models.MovimientoInventarioMaterial()
@@ -203,3 +227,12 @@ def materiales_registrar_movimiento(request, pk):
     else:
         form = forms.MovimientoInventarioMaterial(instance=movimiento)
     return render(request, 'inventario/materiales_registrar_movimientos.html', {'form': form, 'material': material, })
+
+
+@login_required()
+def materiales_generar_qr(request, pk):
+    material = get_object_or_404(models.Material, pk=pk)
+    qr = material.generar_qr()
+    response = HttpResponse(content_type="image/png")
+    qr.save(response, "PNG")
+    return response
