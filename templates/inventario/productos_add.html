@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}
+    Producto Agregar
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>Agregar producto</h3></div>
+                    <div class="panel-body">
+                        <form action="" method="post" class="form">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            {% buttons submit='Guardar' reset='Cancelar' layout='inline' %}{% endbuttons %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="text-center"><img src="{% static 'img/producto_add.png' %}"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

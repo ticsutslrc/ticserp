@@ -25,13 +25,13 @@ class Producto(models.Model):
     # Campos generales
     nombre = models.CharField(null=False, max_length=30, db_index=True)
     descripccion = models.CharField(null=True, blank=True, max_length=60)
-    numero_inventario = models.CharField(null=False, max_length=10, db_index=True)
-    codigo_barras = models.CharField(max_length=20, default='', blank=True, db_index=True)
+    numero_inventario = models.CharField(null=False, max_length=10, db_index=True, unique=True)
+    codigo_barras = models.CharField(max_length=20, default='', blank=True, db_index=True, unique=True)
     peso = models.PositiveIntegerField(default=0)
 
     # Campos para controlar costos
-    ultimo_costo = models.DecimalField(max_digits=10, decimal_places=4)
-    costo_promedio = models.DecimalField(max_digits=10, decimal_places=4)
+    ultimo_costo = models.DecimalField(max_digits=10, decimal_places=4, default=0)
+    costo_promedio = models.DecimalField(max_digits=10, decimal_places=4, default=0)
 
     # Campos para manejar stock
     cantidad_total_almacen = models.IntegerField(default=0)
@@ -255,8 +255,8 @@ class Material(models.Model):
     peso = models.PositiveIntegerField()
 
     # Campos para controlar costos
-    ultimo_costo = models.DecimalField(max_digits=10, decimal_places=4)
-    costo_promedio = models.DecimalField(max_digits=10, decimal_places=4)
+    ultimo_costo = models.DecimalField(max_digits=10, decimal_places=4, default=0)
+    costo_promedio = models.DecimalField(max_digits=10, decimal_places=4, default=0)
 
     # Campos para manejar stock
     cantidad_total_almacen = models.IntegerField(default=0)

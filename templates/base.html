@@ -93,7 +93,8 @@
                             <a href="{% url 'inventario:main' %}"><i class="fa fa-clipboard fa-fw"></i> Inventario<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Productos</a>
+                                    <a href="{% url 'inventario:productos' %}">Productos</a>
+                                    <a href="{% url 'inventario:materiales' %}">Materiales</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -144,15 +145,6 @@
 
     <!-- jQuery -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js '%}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'js/metisMenu.min.js '%}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{% static 'js/sb-admin-2.js' %}"></script>
 
 </body>
 
