@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}
 Principal
 {% endblock %}
 
 {% block body %}
-    <h1>Hola mundo yo soy mainapp</h1>
-
-    <ul>
-        <li><a class="btn btn-success" href="/compras">Compras</a></li>
-        <li></li>
-        <li><a class="btn btn-success" href="/inventario">Inventario</a></li>
-        <li></li>
-        <li><a class="btn btn-success" href="/planeaccion">Planeacion</a></li>
-        <li></li>
-        <li><a class="btn btn-success" href="/produccion">Produccion</a></li>
-        <li></li>
-        <li><a class="btn btn-success" href="/ventas">Ventas</a></li>
-    </ul>
+    <div>
+        <img src="{% static 'img/ontime_erp_2.svg' %}">
+    </div>
+    <br><br><br><br><br>
+    <div class="text-center">
+        <a class="btn btn-success" href="/compras">Compras</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success" href="/inventario">Inventario</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success" href="/planeaccion">Planeacion</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success" href="/produccion">Produccion</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success" href="/ventas">Ventas</a>
+    </div>
 {% endblock %}
