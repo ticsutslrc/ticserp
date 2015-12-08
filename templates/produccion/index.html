@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block title %}
     Principal
 {% endblock %}
 
 {% block body %}
-    <h1>Producci&oacute;n</h1>
+    <style>
+        .content-wrapper {
+            background-color: white !important;
+        }
+
+        .page-header h1 {
+            padding: 20px !important;
+        }
+
+        #chartOrdenes {
+            width: 100%;
+            height: 500px;
+            font-size: 11px;
+        }
+    </style>
+    <div class="page-header">
+        <h1>Producci&oacute;n</h1>
+    </div>
     <div class="container-fluid">
 
         <div class="row">
@@ -15,15 +32,16 @@
 
                 {# ordenes de produccion  #}
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    {#                    <label for="orden">No. Orden</label>#}
-                    {#                    <input id="orden" type="text" value="654657" disabled/>#}
-                    {##}
-                    {#                    <label for="fecha">Fecha</label>#}
-                    {#                    <input id="fecha" type="text" value="12/10/2015" disabled/>#}
-                    <h2> Ordenes de Produccion - Iniciadas</h2>
 
-                    <div class="col-lg-1"></div>
-                    <table class="table table-bordered">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"> Ordenes de Produccion - Iniciadas</h3>
+                        </div>
+
+                    </div>
+
+                    <table class="table table-bordered table-responsive">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -59,48 +77,21 @@
                         {% endif %}
                         </tbody>
                     </table>
-                    {##}
-                    {#                    <table class="table table-bordered">#}
-                    {#                        <thead>#}
-                    {#                        <tr>#}
-                    {#                            <th>Etapa</th>#}
-                    {#                            <th>Proceso</th>#}
-                    {#                            <th>Codigo</th>#}
-                    {#                            <th>Descripcion</th>#}
-                    {#                            <th>No. Serie</th>#}
-                    {#                        </tr>#}
-                    {#                        </thead>#}
-                    {#                        <tbody>#}
-                    {#                        <tr>#}
-                    {#                            <td>Ensamble</td>#}
-                    {#                            <td>Ensamble Tarjeta</td>#}
-                    {#                            <td>Ens56</td>#}
-                    {#                            <td>Ensable de tarjeta madre a case</td>#}
-                    {#                            <td>AB</td>#}
-                    {#                        </tr>#}
-                    {#                        <tr>#}
-                    {#                            <td>Plastico</td>#}
-                    {#                            <td>Moldeo</td>#}
-                    {#                            <td>mold01</td>#}
-                    {#                            <td>Moldeo de plastico de case</td>#}
-                    {#                            <td>AF</td>#}
-                    {#                        </tr>#}
-                    {##}
-                    {#                        </tbody>#}
-                    {#                    </table>#}
+
+
                 </div>
 
                 {#   status de producion         #}
-          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    {#                    <label for="orden">No. Orden</label>#}
-                    {#                    <input id="orden" type="text" value="654657" disabled/>#}
-                    {##}
-                    {#                    <label for="fecha">Fecha</label>#}
-                    {#                    <input id="fecha" type="text" value="12/10/2015" disabled/>#}
-                    <h2> Ordenes de Produccion - Sin Iniciar</h2>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                    <div class="col-lg-1"></div>
-                    <table class="table table-bordered">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"> Ordenes de Produccion - Sin Iniciar</h3>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered  table-responsive">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -136,35 +127,8 @@
                         {% endif %}
                         </tbody>
                     </table>
-                    {##}
-                    {#                    <table class="table table-bordered">#}
-                    {#                        <thead>#}
-                    {#                        <tr>#}
-                    {#                            <th>Etapa</th>#}
-                    {#                            <th>Proceso</th>#}
-                    {#                            <th>Codigo</th>#}
-                    {#                            <th>Descripcion</th>#}
-                    {#                            <th>No. Serie</th>#}
-                    {#                        </tr>#}
-                    {#                        </thead>#}
-                    {#                        <tbody>#}
-                    {#                        <tr>#}
-                    {#                            <td>Ensamble</td>#}
-                    {#                            <td>Ensamble Tarjeta</td>#}
-                    {#                            <td>Ens56</td>#}
-                    {#                            <td>Ensable de tarjeta madre a case</td>#}
-                    {#                            <td>AB</td>#}
-                    {#                        </tr>#}
-                    {#                        <tr>#}
-                    {#                            <td>Plastico</td>#}
-                    {#                            <td>Moldeo</td>#}
-                    {#                            <td>mold01</td>#}
-                    {#                            <td>Moldeo de plastico de case</td>#}
-                    {#                            <td>AF</td>#}
-                    {#                        </tr>#}
-                    {##}
-                    {#                        </tbody>#}
-                    {#                    </table>#}
+
+
                 </div>
 
 
@@ -172,18 +136,18 @@
         </div>
 
 
-    <div class="row">
+        <div class="row">
 
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    {#                    <label for="orden">No. Orden</label>#}
-                    {#                    <input id="orden" type="text" value="654657" disabled/>#}
-                    {##}
-                    {#                    <label for="fecha">Fecha</label>#}
-                    {#                    <input id="fecha" type="text" value="12/10/2015" disabled/>#}
-                    <h2> Ordenes de Produccion - Canceladas</h2>
 
-                    <div class="col-lg-1"></div>
-                    <table class="table table-bordered">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ordenes de Produccion - Canceladas</h3>
+                    </div>
+
+                </div>
+                <div class=" table-responsive">
+                    <table class="table table-bordered ">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -219,12 +183,28 @@
                         {% endif %}
                         </tbody>
                     </table>
-
                 </div>
-    </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div id="chartOrdenes"></div>
+
+            </div>
+
+
+        </div>
 
 
     </div>
 
+
+{% endblock %}
+
+{% block script %}
+
+    <script src="{% static 'js/amcharts/amcharts.js' %}"></script>
+    <script src="{% static 'js/amcharts/serial.js' %}"></script>
+    <script src="{% static 'js/amcharts/themes/light.js' %}"></script>
+    <script src="{% static 'js/produccion/produccionController.js' %}"></script>
 
 {% endblock %}
