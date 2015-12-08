@@ -257,7 +257,7 @@ def generar_pdf_ventas(request):
     header = Paragraph("Listado De ventas", styles['Heading1'])
     ventas.append(header)
     headings = ('Num. Factura','Cliente','Fecha','Producto','Cantidad','Precio','Total')
-    allventas = [(p.num_factura, p.cliente, p.fecha.strftime("%d-%m-%Y"), p.producto.nombre, p.cantidad, p.precio, p.total) for p in models.Venta.objects.all().order_by('-fecha')]
+    allventas = [(p.num_factura, p.cliente, p.fecha.strftime("%d-%m-%Y"), p.producto.nombre, p.cantidad, p.precio, p.subtotal) for p in models.Venta.objects.all().order_by('-fecha')]
     print (allventas);
 
     t = Table([headings] + allventas)
